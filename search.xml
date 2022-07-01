@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>hihihi</title>
+      <link href="/2022/07/01/hihihi/"/>
+      <url>/2022/07/01/hihihi/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2022/07/01/hello-world/"/>
+      <url>/2022/07/01/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第一个脚本——百度翻译爬虫</title>
+      <link href="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/"/>
+      <url>/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/</url>
+      
+        <content type="html"><![CDATA[<p>记录第一次制作脚本</p><p>本文记录制作一个调用百度翻译实现翻译功能的小脚本</p><p>主要有三个步骤：【找接口】&#x3D;&gt;【研究关键字】&#x3D;&gt;【写脚本】</p><h2 id="找到翻译请求接口"><a href="#找到翻译请求接口" class="headerlink" title="找到翻译请求接口"></a>找到翻译请求接口</h2><p>这一步没有难度，在百度翻译页面打开开发者工具，然后输入<code>哈哈</code>，然后在network里找接口就可以。</p><p>如果请求太多的话，可以用<code>Fetch/XHR</code>按钮过滤一下：</p><img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630004106276.png" class="" title="image-20220630004106276"><p>可以看到，这是一个POST请求</p><h2 id="分析请求关键字"><a href="#分析请求关键字" class="headerlink" title="分析请求关键字"></a>分析请求关键字</h2><ol><li><p>从上面看到，关键字有<strong>from</strong>、<strong>to</strong>、<strong>query</strong>、<strong>transtype</strong>、<strong>simple_means_flag</strong>、<strong>sign</strong>、<strong>token</strong>、<strong>domain</strong>。</p><p>分析之后，得出：<strong>from</strong>、<strong>to</strong>代表<strong>输入语言</strong>、<strong>输出语言</strong>；<strong>query</strong>为<strong>输入文字</strong>；<strong>transtype</strong>为<strong>翻译类型</strong>(自动翻译、点击后翻译等，这个关键字并不重要)；<strong>domain</strong>为常值”common”。而<strong>sign</strong>和<strong>token</strong>为一串<em><strong>奇怪的数字</strong></em></p></li><li><p>from、to指定语言类型，后面发现，from是可以自动检测或者手动指定的。如果希望自动检测，那就需要在请求翻译接口前请求一次langdetect，并匹配出语言类型。<img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630005521930.png" class="" title="image-20220630005521930"></p></li><li><p>query由用户输入；transtype和simple_means_flag完全可以写死。</p></li><li><p>至于token,全局搜索一下那串字符，发现它是请求fanyi.baidu.com时获取到的</p><img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630010149574.png" class="" title="image-20220630010149574"><p>截止到目前，我需要关心的字段有：</p><ul><li>from：通过langdetect请求获取</li><li>query：由用户输入</li><li>token：请求fanyi.baidu.com获取</li><li>sign：一个神秘字段</li></ul></li><li><p>现在来研究这个sign：</p><ul><li><p>像token一样进行全局搜索，没有结果</p><img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630010637908.png" class="" title="image-20220630010637908"></li><li><p>从v2transapi请求的调用栈中寻找线索</p><img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630010808634.png" class="" title="image-20220630010808634"><p>一层层地观察call stack，在e.onTranslate附近发现可疑之处</p><img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630011052897.png" class="" title="image-20220630011052897"><p>经过打断点调试，发现这里的n就是我输入的<code>哈哈</code>二字，所以，我只需要找到这个x()函数，就能得到<strong>sign</strong>的值！！！</p><img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630014421971.png" class="" title="image-20220630014421971"></li><li><p>在控制台里输入<code>x</code>并回车，弹出了我想要的函数。但在复制得到的函数并不能直接运行，因为函数中往往存在一些全局变量或调用了其他函数，这时，需要耐心地把它们补全。经历了一个window.gtk、一个n函数，我终于得到了sign值：</p><img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630011935505.png" class="" title="image-20220630011935505"></li><li><p>至此，关键字全部复现。</p></li></ul></li></ol><h2 id="写-抄-脚本"><a href="#写-抄-脚本" class="headerlink" title="写(抄)脚本"></a>写(抄)脚本</h2><p>脚本用python编写，写的过程中要注意请求头携带cookie。</p><p>另外，我在初次使用PyCharm时，遇到了两个问题：</p><ul><li><p>运行不了js脚本：其实，通过命令行是可以直接node xxx.js的；但最后找到了标准方法——下载nodejs插件。。。</p></li><li><p>py文件中import报错：我明明已经安装过这些库了，怎么说我没有呢？原来新建项目的时候，PyCharm给我在项目目录下放了一个精简的python编译器，而我所安装的库，都在我的AppData那里。。。于是有两种解决思路：一是在项目目录下安装那些库，二是直接使用我自己的解释器。</p></li></ul><p>附：<a href="https://github.com/kgepachong/crawler/tree/main/fanyi_baidu_com">git hub上的百度翻译小爬虫</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 脚本 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 爬虫 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
