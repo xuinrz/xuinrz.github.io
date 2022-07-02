@@ -121,15 +121,16 @@
             
             <p class="post-count animated fadeInDown">
                 
-                <span>
+
+                <span title="post.wordcount">
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2k
+                    754
                 </span>
                 
                 
-                <span>
+                <span >
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    10 mins.
+                    6&nbspmins
                 </span>
                 
                 
@@ -297,6 +298,8 @@
 </body>
 <footer>
     <p class="copyright" id="copyright">
+    <!-- 博客总字数 -->
+        <span style="color:#9e9e9e"><b class="iconfont icon-text2"></b>&nbsp字数&nbsp<span class="gradient-text">754</span>&nbsp字</span>&nbsp&nbsp
         
     <!-- 不蒜子统计 -->
     <span style="color:#9e9e9e">
@@ -318,7 +321,7 @@
                 mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
                 seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
                 snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
-                document.getElementById("timeDate").innerHTML = "本站已运行 <span class='gradient-text'>"+dnum+"</span> 天 "; 
+                document.getElementById("timeDate").innerHTML = "本站已安全运行 <span class='gradient-text'>"+dnum+"</span> 天 "; 
                 document.getElementById("times").innerHTML ="<span class='gradient-text'>"+ hnum + "</span> 时 <span class='gradient-text'>" + mnum + "</span> 分 <span class='gradient-text'>" + snum + "</span> 秒"; 
             } 
         setInterval("createtime()",250);
