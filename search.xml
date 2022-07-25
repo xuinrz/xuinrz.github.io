@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>2022学线暑假实训：山大迷踪图片服务</title>
+      <link href="/2022/07/25/2022%E5%AD%A6%E7%BA%BF%E6%9A%91%E5%81%87%E5%AE%9E%E8%AE%AD%EF%BC%9A%E5%B1%B1%E5%A4%A7%E8%BF%B7%E8%B8%AA%E5%9B%BE%E7%89%87%E6%9C%8D%E5%8A%A1/"/>
+      <url>/2022/07/25/2022%E5%AD%A6%E7%BA%BF%E6%9A%91%E5%81%87%E5%AE%9E%E8%AE%AD%EF%BC%9A%E5%B1%B1%E5%A4%A7%E8%BF%B7%E8%B8%AA%E5%9B%BE%E7%89%87%E6%9C%8D%E5%8A%A1/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>记录第一次做图片服务后端</p><p>后端架构为：SpringBoot + Jpa + MySQL + JWT</p><p>本文同步在我的博客<a href="https://xzx.vercel.app/">SPIN 自旋</a></p></blockquote><h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>山大迷踪中关于图片的需求有：用户头像、发布迷踪帖(含照片)、发布匹配帖(含照片)、积分商城初始化(商品图片)。</p><h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>分析之后得出，后端应实现如下功能：</p><blockquote><ol><li><p>上传图片</p></li><li><p>在服务器保存图片</p></li><li><p>图片回传</p></li><li><p>删除废弃的头像、未过审帖子的照片、匹配成功后两帖子的照片</p></li></ol></blockquote><h1 id="代码实现（以用户头像为例）"><a href="#代码实现（以用户头像为例）" class="headerlink" title="代码实现（以用户头像为例）"></a>代码实现（以用户头像为例）</h1><h2 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h2><p>采用formdata格式，直接上传图片文件，在后端使用MultipartFile类来接收。</p><p>Controller代码如下：</p><pre><code class="java">@PutMapping(&quot;/changeavatar&quot;)public Result changeAvatar(MultipartFile avatar, HttpServletRequest request) &#123;    String token = request.getHeader(&quot;token&quot;);//从请求头中拿到token    User user = userService.getUserByToken(token);//通过token来拿到用户实体    userService.changeAvatar(user,avatar);// 修改该用户的头像    return Result.success(JwtUtil.refreshToken(token));//返回成功码和新的token&#125;</code></pre><p>其中，UserService.changeAvatar方法的实现如下：</p><pre><code class="java">@Overridepublic void changeAvatar(User user, MultipartFile avatar) &#123;    String avatarPath = ImgUtil.uploadAvatar(avatar);//保存图片到服务器，后面会贴出这个方法的代码    if(avatarPath!=null&amp;&amp;user.getAvatar()!=null)ImgUtil.deleteImg(user.getAvatar());//存在旧头像则删除    user.setAvatar(avatarPath);//保存用户头像url    modifyUser(user);//更新用户&#125;</code></pre><h2 id="保存图片到服务器"><a href="#保存图片到服务器" class="headerlink" title="保存图片到服务器"></a>保存图片到服务器</h2><p>上面我们已经拿到了图片的MutipartFile对象，现在我们把这个对象写成文件，保存在</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 后端 实训 图片服务 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Minecraft安装optifine时无法正确打开jar文件</title>
       <link href="/2022/07/12/Minecraft%E5%AE%89%E8%A3%85optifine%E6%97%B6%E6%97%A0%E6%B3%95%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80jar%E6%96%87%E4%BB%B6/"/>
       <url>/2022/07/12/Minecraft%E5%AE%89%E8%A3%85optifine%E6%97%B6%E6%97%A0%E6%B3%95%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80jar%E6%96%87%E4%BB%B6/</url>
