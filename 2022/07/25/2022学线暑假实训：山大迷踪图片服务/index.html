@@ -192,98 +192,98 @@
 </blockquote>
 <h1 id="代码实现（以用户头像为例）"><a href="#代码实现（以用户头像为例）" class="headerlink" title="代码实现（以用户头像为例）"></a>代码实现（以用户头像为例）</h1><h2 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h2><p>采用formdata格式，直接上传图片文件，在后端使用MultipartFile类来接收。</p>
 <p>Controller代码如下：</p>
-<pre><code class="java">@PutMapping(&quot;/changeavatar&quot;)
-public Result changeAvatar(MultipartFile avatar, HttpServletRequest request) &#123;
-    String token = request.getHeader(&quot;token&quot;);//从请求头中拿到token
-    User user = userService.getUserByToken(token);//通过token来拿到用户实体
-    userService.changeAvatar(user,avatar);// 修改该用户的头像
-    return Result.success(JwtUtil.refreshToken(token));//返回成功码和新的token
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@PutMapping</span><span class="token punctuation">(</span><span class="token string">"/changeavatar"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">Result</span> <span class="token function">changeAvatar</span><span class="token punctuation">(</span><span class="token class-name">MultipartFile</span> avatar<span class="token punctuation">,</span> <span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span> token <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"token"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//从请求头中拿到token</span>
+    <span class="token class-name">User</span> user <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">getUserByToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//通过token来拿到用户实体</span>
+    userService<span class="token punctuation">.</span><span class="token function">changeAvatar</span><span class="token punctuation">(</span>user<span class="token punctuation">,</span>avatar<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 修改该用户的头像</span>
+    <span class="token keyword">return</span> <span class="token class-name">Result</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token class-name">JwtUtil</span><span class="token punctuation">.</span><span class="token function">refreshToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//返回成功码和新的token</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>其中，UserService.changeAvatar方法的实现如下：</p>
-<pre><code class="java">@Override
-public void changeAvatar(User user, MultipartFile avatar) &#123;
-    String avatarPath = ImgUtil.uploadAvatar(avatar);//保存图片到服务器，后面会贴出这个方法的代码
-    if(avatarPath!=null&amp;&amp;user.getAvatar()!=null)ImgUtil.deleteImg(user.getAvatar());//存在旧头像则删除
-    user.setAvatar(avatarPath);//保存用户头像url
-    modifyUser(user);//更新用户
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">changeAvatar</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">,</span> <span class="token class-name">MultipartFile</span> avatar<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span> avatarPath <span class="token operator">=</span> <span class="token class-name">ImgUtil</span><span class="token punctuation">.</span><span class="token function">uploadAvatar</span><span class="token punctuation">(</span>avatar<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//保存图片到服务器，后面会贴出这个方法的代码</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>avatarPath<span class="token operator">!=</span><span class="token keyword">null</span><span class="token operator">&amp;&amp;</span>user<span class="token punctuation">.</span><span class="token function">getAvatar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token class-name">ImgUtil</span><span class="token punctuation">.</span><span class="token function">deleteImg</span><span class="token punctuation">(</span>user<span class="token punctuation">.</span><span class="token function">getAvatar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//存在旧头像则删除</span>
+    user<span class="token punctuation">.</span><span class="token function">setAvatar</span><span class="token punctuation">(</span>avatarPath<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//保存用户头像url</span>
+    <span class="token function">modifyUser</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//更新用户</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="保存图片到服务器"><a href="#保存图片到服务器" class="headerlink" title="保存图片到服务器"></a>保存图片到服务器</h2><p>上面我们已经拿到了图片的MutipartFile对象，现在我们把这个对象写成文件，保存在服务器的本地目录下。</p>
 <p>这个过程，就是上文中说到的ImgUtil.uploadAvatar方法，代码如下：</p>
-<pre><code class="java">package misstrace.Util;
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">misstrace<span class="token punctuation">.</span></span><span class="token class-name">Util</span><span class="token punctuation">;</span>
 
-import net.coobird.thumbnailator.Thumbnails;
-import org.springframework.web.multipart.MultipartFile;
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">net<span class="token punctuation">.</span>coobird<span class="token punctuation">.</span>thumbnailator<span class="token punctuation">.</span></span><span class="token class-name">Thumbnails</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>multipart<span class="token punctuation">.</span></span><span class="token class-name">MultipartFile</span></span><span class="token punctuation">;</span>
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">UUID</span></span><span class="token punctuation">;</span>
 
-public class ImgUtil &#123;
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ImgUtil</span> <span class="token punctuation">&#123;</span>
 
-    //    定义头像存储地址 
-    private static final String AVATAR_PATH = &quot;/project/misstrace/tomcat8port8080/webapps/avatar/&quot;;
-    //    定义访问头像的路径根部 http
-    private static final String AVATAR_LOAD_PATH = &quot;http://xxx.xxx.xxx/misstrace/avatar/&quot;;
+    <span class="token comment">//    定义头像存储地址 </span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> AVATAR_PATH <span class="token operator">=</span> <span class="token string">"/project/misstrace/tomcat8port8080/webapps/avatar/"</span><span class="token punctuation">;</span>
+    <span class="token comment">//    定义访问头像的路径根部 http</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> AVATAR_LOAD_PATH <span class="token operator">=</span> <span class="token string">"http://xxx.xxx.xxx/misstrace/avatar/"</span><span class="token punctuation">;</span>
 
-    //将MultipartFile压缩保存
-    public static String uploadAvatar(MultipartFile avatar) &#123;
-        //获得上传文件的名称
-        String rawFileName = avatar.getOriginalFilename();
-        //生成随机uuid，连接到原文件名前面，防止重名
-        String uuid = UUID.randomUUID().toString().replace(&quot;-&quot;,&quot;&quot;);
-        String newFileName = uuid+&quot;-&quot;+rawFileName;
-        //压缩图片，并保存在上述路径
-        Boolean flag = zipAvatar(avatar,AVATAR_PATH+newFileName);
-        if(!flag)return null;
-        return AVATAR_LOAD_PATH+newFileName;
-    &#125;
+    <span class="token comment">//将MultipartFile压缩保存</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">uploadAvatar</span><span class="token punctuation">(</span><span class="token class-name">MultipartFile</span> avatar<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//获得上传文件的名称</span>
+        <span class="token class-name">String</span> rawFileName <span class="token operator">=</span> avatar<span class="token punctuation">.</span><span class="token function">getOriginalFilename</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//生成随机uuid，连接到原文件名前面，防止重名</span>
+        <span class="token class-name">String</span> uuid <span class="token operator">=</span> UUID<span class="token punctuation">.</span><span class="token function">randomUUID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> newFileName <span class="token operator">=</span> uuid<span class="token operator">+</span><span class="token string">"-"</span><span class="token operator">+</span>rawFileName<span class="token punctuation">;</span>
+        <span class="token comment">//压缩图片，并保存在上述路径</span>
+        <span class="token class-name">Boolean</span> flag <span class="token operator">=</span> <span class="token function">zipAvatar</span><span class="token punctuation">(</span>avatar<span class="token punctuation">,</span>AVATAR_PATH<span class="token operator">+</span>newFileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>flag<span class="token punctuation">)</span><span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> AVATAR_LOAD_PATH<span class="token operator">+</span>newFileName<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
     
-    // 压缩图片并保存在该目录下
-    public static Boolean zipAvatar(MultipartFile img,String path) &#123;
-        try &#123;
-            //先压缩并保存图片
-            Thumbnails.of(img.getInputStream()).size(128,128)  //压缩尺寸 范围（0.00--1.00）
-                    .outputQuality(0.4f)  //压缩质量 范围（0.00--1.00）
-                    .toFile(path); //输出路径
-        &#125; catch (IOException e) &#123;
-            e.printStackTrace();
-            return false;
-        &#125;
-        return true;
-    &#125;
-&#125;
-</code></pre>
+    <span class="token comment">// 压缩图片并保存在该目录下</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Boolean</span> <span class="token function">zipAvatar</span><span class="token punctuation">(</span><span class="token class-name">MultipartFile</span> img<span class="token punctuation">,</span><span class="token class-name">String</span> path<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">//先压缩并保存图片</span>
+            <span class="token class-name">Thumbnails</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">,</span><span class="token number">128</span><span class="token punctuation">)</span>  <span class="token comment">//压缩尺寸 范围（0.00--1.00）</span>
+                    <span class="token punctuation">.</span><span class="token function">outputQuality</span><span class="token punctuation">(</span><span class="token number">0.4f</span><span class="token punctuation">)</span>  <span class="token comment">//压缩质量 范围（0.00--1.00）</span>
+                    <span class="token punctuation">.</span><span class="token function">toFile</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//输出路径</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>上面的注释也说的很清楚了，我使用Thumbnails压缩了图片（这样能加速后续的“图片回传”功能，减轻服务器压力）</p>
 <p>Thumbnails的依赖如下（放入pom.xml的dependencies标签中）：</p>
-<pre><code class="xml">&lt;!--图片处理thumbnailator--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;net.coobird&lt;/groupId&gt;
-    &lt;artifactId&gt;thumbnailator&lt;/artifactId&gt;
-    &lt;version&gt;0.4.17&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!--图片处理thumbnailator--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>net.coobird<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>thumbnailator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>0.4.17<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="图片回传"><a href="#图片回传" class="headerlink" title="图片回传"></a>图片回传</h2><p>在保存图片的时候，我传回的是带有图片名的url，这个url将一路传到前端手里，然后由前端来请求加载这个图片。</p>
 <p>那么如何让前端通过url就能访问头像文件呢？</p>
 <p>我这里采用的是tomcat，广播出去静态资源（可恶的华为云，安全组默认关掉了所有端口。。）。</p>
 <p>后面其实还是使用nginx做了转发，这样能不暴露进程的端口。</p>
 <p>再后来，就是研究了半天域名和https（ssl证书）的问题，虽然域名解析和https都能用，但考虑到我的域名只有半年期限了，还是继续使用原始的服务器ip了。</p>
 <h2 id="删除废弃的图片"><a href="#删除废弃的图片" class="headerlink" title="删除废弃的图片"></a>删除废弃的图片</h2><p>直接上代码（在ImgUtil类中）：</p>
-<pre><code class="java">//通过url路径删除图片
-public static Boolean deleteImg(String imgLoadPath) &#123;
-    boolean flag = false;
-    String filePath = &quot;/project/misstrace/tomcat8port8080/webapps/&quot;+imgLoadPath.substring(33);
-    //根据路径创建文件对象
-    File file = new File(filePath);
-    //路径是个文件且不为空时删除文件
-    if(file.isFile()&amp;&amp;file.exists())&#123;
-        flag = file.delete();
-    &#125;
-    //删除失败时，返回false
-    return flag;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//通过url路径删除图片</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Boolean</span> <span class="token function">deleteImg</span><span class="token punctuation">(</span><span class="token class-name">String</span> imgLoadPath<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">boolean</span> flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> filePath <span class="token operator">=</span> <span class="token string">"/project/misstrace/tomcat8port8080/webapps/"</span><span class="token operator">+</span>imgLoadPath<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">33</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//根据路径创建文件对象</span>
+    <span class="token class-name">File</span> file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//路径是个文件且不为空时删除文件</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">isFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;&amp;</span>file<span class="token punctuation">.</span><span class="token function">exists</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        flag <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">//删除失败时，返回false</span>
+    <span class="token keyword">return</span> flag<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总体来说，这部分服务的实现过程还是很愉快的，一个从0到1的过程，”接口生效“的正向反馈让我有些上头。</p>
 <p>然而在上手的时候，我还是意识到对异常处理的陌生。</p>
 
@@ -361,7 +361,7 @@ public static Boolean deleteImg(String imgLoadPath) &#123;
 <footer>
     <p class="copyright" id="copyright">
     <!-- 博客总字数 -->
-        <span style="color:#9e9e9e"><b class="iconfont icon-text2"></b>&nbsp字数&nbsp<span class="gradient-text">7.6k</span>&nbsp字</span>&nbsp&nbsp
+        <span style="color:#9e9e9e"><b class="iconfont icon-text2"></b>&nbsp字数&nbsp<span class="gradient-text">7.5k</span>&nbsp字</span>&nbsp&nbsp
         
     <!-- 不蒜子统计 -->
     <span style="color:#9e9e9e">
@@ -498,6 +498,10 @@ public static Boolean deleteImg(String imgLoadPath) &#123;
 <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
   
 <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/java/java.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/html/html.min.js"></script>
    
 <script src="/js/busuanzi.min.js"></script>
 
