@@ -1,0 +1,920 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>C++复习 - SPIN&nbsp&nbsp自旋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <script src="/js/anime.min.js"></script>
+    <meta name="keywords" content="自旋 博客 SPIN spin XUinRZ xuinrz,"> 
+    <meta name="description" content="C++复习
+本文参考《数据结构、算法与应用  C++语言描述  原书第2版》第一章中复习c++的思路
+
+函数与参数参数传递值传递Value Parametersint calculate(int a,"> 
+    <meta name="author" content="XUinRZ"> 
+    <link rel="alternative" href="atom.xml" title="SPIN" type="application/atom+xml"> 
+    <link rel="icon" href="/img/avatar.png"> 
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+    
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+    
+    <script>var musiclist = ""</script>
+    
+<script src="/js/loadaplayer.js"></script>
+
+    <!-- 引用依赖 -->
+    
+<link rel="stylesheet" href="/aplayer/dist/APlayer.min.css">
+
+    
+<script src="/aplayer/dist/APlayer.min.js"></script>
+<script src="/js/Meting.min.js"></script>
+
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="loading">
+
+<canvas
+    id="fireworks"
+    style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647"
+></canvas>
+<script src="/js/fireworks.js"></script>
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">SPIN</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="/">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">C++复习</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.25), #100e17),
+                url('/img/6.png') ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/数据结构"><b>「
+                    </b>数据结构<b> 」</b></a>
+                
+                九月 05, 2022
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2022/09/05/C++%E5%A4%8D%E4%B9%A0/" title="C++复习" class="">C++复习</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+
+                <span title="post.wordcount">
+                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                    3k
+                </span>
+                
+                
+                <span >
+                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                    21&nbspmins
+                </span>
+                
+                
+                <span id="/2022/09/05/C++复习/" class="leancloud_visitors" data-flag-title="C++复习">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span class="leancloud-visitors-count">1000000</span>
+                </span>
+                
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">    
+
+    <div class='main'>
+        <div class="content markdown animated fadeIn"><canvas
+            id="background"
+            style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"
+            ></canvas>
+            <script src="/js/background.js"></script>
+            <h1 id="C-复习"><a href="#C-复习" class="headerlink" title="C++复习"></a>C++复习</h1><blockquote>
+<p>本文参考《数据结构、算法与应用  C++语言描述  原书第2版》第一章中复习c++的思路</p>
+</blockquote>
+<h2 id="函数与参数"><a href="#函数与参数" class="headerlink" title="函数与参数"></a>函数与参数</h2><h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><h4 id="值传递Value-Parameters"><a href="#值传递Value-Parameters" class="headerlink" title="值传递Value Parameters"></a>值传递Value Parameters</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int calculate(int a,int b,int c)&#123;return a+b+b*c+4;&#125;
+int m&#x3D;20, x&#x3D;10, y&#x3D;15,z;
+z &#x3D; calculate(m,x,y);&#x2F;&#x2F;这个过程会将把局部变量abc复制构造成mxy，方法结束后再析构
+&#x2F;&#x2F;效率低（比如大型矩阵传值）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="引用传递Reference-Parameters"><a href="#引用传递Reference-Parameters" class="headerlink" title="引用传递Reference Parameters"></a>引用传递Reference Parameters</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int calculate(int &amp;a,int &amp;b,int &amp;c)&#123;return a+b+b*c+4;&#125;
+int m&#x3D;20, x&#x3D;10, y&#x3D;15,z;
+z &#x3D; calculate(m,x,y);&#x2F;&#x2F;这个过程会将把abc指向mxy的地址，比较快
+&#x2F;&#x2F;对于int、float这种简单的基本数据类型，其实可以直接使用值传递；而其他数据类型比较复杂，应该用引用传递<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="常量引用传递Const-Reference-Parameters"><a href="#常量引用传递Const-Reference-Parameters" class="headerlink" title="常量引用传递Const Reference Parameters"></a>常量引用传递Const Reference Parameters</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">template &lt;class Ta, class Tb , class Tc&gt;
+Ta abc(const Ta&amp; a, const Tb&amp; b, const Tc&amp; c)
+&#123;return a+b*c;&#125; 
+&#x2F;&#x2F;当函数不会修改实际参数值(只读)的时候可以采用常量引用参数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="函数返回方式"><a href="#函数返回方式" class="headerlink" title="函数返回方式"></a>函数返回方式</h3><h4 id="值返回Return-Value"><a href="#值返回Return-Value" class="headerlink" title="值返回Return Value"></a>值返回Return Value</h4><p>​	直接复制一份被返回的东西</p>
+<h4 id="引用返回Return-Reference"><a href="#引用返回Return-Reference" class="headerlink" title="引用返回Return Reference"></a>引用返回Return Reference</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">T&amp; X(int i, T&amp; a)
+&#123;……
+Return a; 
+&#125;
+&#x2F;&#x2F;只返回一个引用，不会把该引用对应的值复制到返回环境中<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​	只返回一个引用，不会把该引用对应的值复制到环境中</p>
+<h4 id="常量引用返回Return-Const-Reference"><a href="#常量引用返回Return-Const-Reference" class="headerlink" title="常量引用返回Return Const Reference"></a>常量引用返回Return Const Reference</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Const T&amp; X(int i,T&amp; z)
+&#x2F;&#x2F;返回的结果是一个不变化的对象（？？？没看明明白）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="重载函数"><a href="#重载函数" class="headerlink" title="重载函数"></a>重载函数</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int abc(int a, int b, int c)
+&#123;return a+b*c;&#125;
+&#x2F;&#x2F;重载abc
+float abc(float a, float b, float c)
+&#123;return a+b*c;&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int abc(int a, int b, int c)
+&#123;
+if(a&lt;&#x3D;0 || b&lt;&#x3D;0 || c&lt;&#x3D;0 )
+	throw “All parameters should be &gt;0” ; &#x2F;&#x2F;抛出了一个类型为char*的异常
+return a+b*c;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="捕获处理异常"><a href="#捕获处理异常" class="headerlink" title="捕获处理异常"></a>捕获处理异常</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int main()&#123;
+	try (cout&lt;&lt;abc(2,0,4)&lt;&lt;endl; )
+	catch (char* e)&#x2F;&#x2F;当捕捉到char*类型异常时，执行下面的语句：
+		&#123;
+		cout&lt;&lt; “The parameters to abc were 2,0,4 ”&lt;&lt;endl;
+		cout&lt;&lt; “An exception has been thrown”&lt;&lt;endl; 
+		cout&lt;&lt; e &lt;&lt;endl; &#x2F;&#x2F;这里把该异常直接cout出来了
+		return 1;
+		&#125;
+	return 0;
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="动态存储空间"><a href="#动态存储空间" class="headerlink" title="动态存储空间"></a>动态存储空间</h2><blockquote>
+<p> C&#x2F;C++定义了4个内存区间：</p>
+<ol>
+<li><p><strong>代码区</strong> </p>
+</li>
+<li><p><strong>全局变量与静态变量区</strong> </p>
+</li>
+<li><p><strong>局部变量区(栈区)</strong>  </p>
+</li>
+<li><p>**动态存储区，即堆(heap)区或自由存储区(free  store) **</p>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>一般定义变量（或对象）时，编译器是知道它的大小的，可以直接分配内存；这种方式称为<strong>静态存储分配</strong>。</p>
+<p>而有些对象只有运行时才知道大小，编译时就无法指定存储空间，这时要采用<strong>动态存储分配</strong>（此时记得要释放内存）。动态存储分配都在<strong>堆区（动态存储区）</strong>进行。</p>
+</blockquote>
+<h3 id="操作符new-可用来进行动态存储分配："><a href="#操作符new-可用来进行动态存储分配：" class="headerlink" title="操作符new 可用来进行动态存储分配："></a>操作符new 可用来进行动态存储分配：</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int *y ;&#x2F;&#x2F;定义一个int类型指针
+y&#x3D;new int;&#x2F;&#x2F;让它 &#x3D; 一个指向int大小的动态空间的指针
+*y &#x3D; 10; &#x2F;&#x2F;赋值操作
+
+&#x2F;&#x2F;也可以采取以下写法
+
+int *y &#x3D; new int;
+*y &#x3D; 10;
+
+int *y &#x3D; new int (10);
+
+int *y;
+y &#x3D; new int (10);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">cin &gt;&gt; n;
+float *x &#x3D; new float[n];
+&#x2F;&#x2F;如果数组的大小在编译时是未知的，必须进行动态存储分配。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;创建动态的二维数组(看的有点晕了)
+template &lt;class T&gt;
+bool make2dArray (T** &amp;x, int Rows, int columns)
+&#123;
+	try &#123;
+		x &#x3D; new T* [Rows]; 	&#x2F;&#x2F;x是一个数组的指针，这个数组里也全是指针
+		for (int i &#x3D; 0 ; i &lt; Rows; i++)
+		x[i] &#x3D; new T [columns]; &#x2F;&#x2F;每一个“行”都是一个动态数组
+		return true;
+		&#125;
+	catch (bad_alloc) &#123;return false;&#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">float *x;
+try &#123;x &#x3D; new float [n];&#125;
+catch (bad_alloc) &#123; &#x2F;&#x2F;内存不足 bad_alloc
+	cerr &lt;&lt; &quot;Out of Memory&quot; &lt;&lt; endl;
+	exit (1) ; 
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;二维数组，在编译时数组的行数未知:
+char (*c)[5];&#x2F;&#x2F;（这个写法要记好）
+try &#123; c &#x3D; new char [n][5];&#125;
+catch (bad_alloc) &#123;
+	cerr &lt;&lt; &quot;Out of Memory&quot; &lt;&lt; endl;
+	exit (1);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="操作符-delete-释放由操作符new所分配的空间"><a href="#操作符-delete-释放由操作符new所分配的空间" class="headerlink" title="操作符 delete    释放由操作符new所分配的空间"></a>操作符 delete    释放由操作符new所分配的空间</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int *y &#x3D; new int (10);
+Delete y;
+float *x&#x3D;new float[n];
+Delete []x;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;释放动态的二维数组
+template &lt;class T&gt;
+void delete2dArray( T** &amp;x, int Rows)&#x2F;&#x2F;这里只需要传入行数就行，因为删除某行的时候，不需要知道它的列数
+&#123;
+	for (int i &#x3D; 0 ; i &lt; Rows ; i++)
+		delete [] x[i]; &#x2F;&#x2F;删除每个x[i],即删除每个行
+	delete [] x; &#x2F;&#x2F;最后才删除x
+	x &#x3D; NULL;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="自有数据类型"><a href="#自有数据类型" class="headerlink" title="自有数据类型"></a>自有数据类型</h2><p>下面以货币类currency为例（有点长，耐心记下来）：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;先枚举出来正负号的表达方式
+enum signType &#123;plus, minus&#125;;
+&#x2F;&#x2F;声明货币类，和其中的几个方法
+class currency &#123;
+	public:
+		&#x2F;&#x2F;构造函数
+		currency(signType theSign &#x3D; plus, unsigned long theDollars &#x3D; 0, unsigned int 
+		theCents &#x3D; 0); &#x2F;&#x2F;只声明，未实现
+		&#x2F;&#x2F;析构函数
+		~currency() &#123;&#125;
+    
+		bool setValue(signType, unsigned long, unsigned int);&#x2F;&#x2F;只声明，未实现
+		bool setValue(double);&#x2F;&#x2F;只声明，未实现
+    
+    	&#x2F;&#x2F;三个getter函数
+		signType getSign() const &#123;return sign;&#125;
+		unsigned long getDollars() const &#123;return dollars;&#125;
+		unsigned int getCents() const &#123;return cents;&#125;
+    
+    	&#x2F;&#x2F;下面三个是常量函数（不改变调用对象的值）
+		currency add(const currency&amp;) const;
+		currency&amp; increment(const currency&amp;);
+		void output() const;
+    
+	private:
+		signType sign; &#x2F;&#x2F;符号（资金的正负）
+		unsigned long dollars; &#x2F;&#x2F;美元的数量
+		unsigned int cents; &#x2F;&#x2F;美分的数量
+&#125;
+
+&#x2F;&#x2F;构造函数的实现 
+currency::currency(signType theSign, unsigned long theDollars, 
+unsigned int theCents)
+&#123;
+	if (theCents &gt; 99) &#x2F;&#x2F;美分太多，抛出异常
+		throw illegalParameterValue(&quot;Cents should be &lt; 100&quot; );
+	sign &#x3D; theSign; 
+	dollars &#x3D; theDollars; 
+	cents &#x3D; theCents;
+&#125;
+&#x2F;&#x2F;两个修改货币数setValue函数的实现
+bool currency::setValue((signType theSign, unsigned long 
+theDollars, unsigned int theCents))
+&#123;
+	if (theCents &gt; 99) &#x2F;&#x2F;美分太多，抛出异常
+		throw illegalParameterValue(&quot;Cents should be &lt; 100&quot; );
+	sign &#x3D; theSign; 
+	dollars &#x3D; theDollars; 
+	cents &#x3D; theCents; 
+	return true;
+&#125;
+bool currency::setValue(double theAmount)
+&#123;&#x2F;&#x2F;给调用对象的数据成员赋值
+	if (theAmount &lt; 0) &#123;sign &#x3D; minus; theAmount &#x3D; -theAmount;&#125;
+		else sign &#x3D; plus;
+	dollars &#x3D; (unsigned long) theAmount; &#x2F;&#x2F;提取整数部分
+	cents &#x3D; (unsigned int) ((theAmount+0.001-dollars)*100); &#x2F;&#x2F;提取两个小数位
+	return true;
+&#125;
+
+&#x2F;&#x2F;合计add函数的实现（方法头上有const，是常量函数，不会改变调用者，而是返回一个新的currency对象）
+currency currency::add(const currency&amp; x) const
+&#123;&#x2F;&#x2F;把x和 *this相加.
+	long a1, a2, a3;
+	currency result;
+	&#x2F;&#x2F;把调用对象转换成符号整数
+	a1 &#x3D; dollars * 100 + cents; 
+	if (sign &#x3D; &#x3D; minus) a1 &#x3D; -a1;
+	&#x2F;&#x2F;把x转换成符号整数
+	a2 &#x3D; x.dollars * 100 + x.cents; 
+	if (x.sign &#x3D; &#x3D; minus) a2 &#x3D; -a2 ;
+	a3 &#x3D; a1 + a2;
+	&#x2F;&#x2F;转换为currency 对象的表达形式
+	if (a3 &lt; 0) &#123;result.sign &#x3D; minus; a3 &#x3D; -a3 ; &#125;
+	else result.sign &#x3D; plus;&#x2F;&#x2F;这里可以用.直接访问currency的private字段，因为add是currency类的函数
+	result.dollars &#x3D; a3&#x2F;100;
+	result.cents &#x3D; a3 - result.dollars * 100;
+	return result;
+&#125;
+&#x2F;&#x2F;资金增加increment函数的实现（调用者的值增加了）
+currency&amp; currency::increment(const currency&amp; x)
+&#123;
+	*this &#x3D; add(x);
+	return *this;
+&#125;
+&#x2F;&#x2F;打印资金output函数的实现
+void currency::output ( ) const
+&#123;&#x2F;&#x2F;输出调用对象的值
+	if (sign &#x3D; &#x3D; minus) cout &lt;&lt; &#39;-&#39;;
+	cout &lt;&lt; &#39;$&#39; &lt;&lt; dollars &lt;&lt; &#39;.&#39;;
+	if (cents &lt; 10) cout &lt;&lt; &quot;0&quot;;
+	cout &lt;&lt; cents;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>假设上文的代码都在currency.h中</p>
+<p>下面开始使用currency类：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &quot;currency.h &quot;
+using namespace std;
+int main ()
+&#123;
+	currency g, h(plus, 3, 50), i, j;
+	&#x2F;&#x2F;使用两种形式的setValue来赋值
+	g.setValue(minus, 2, 25);
+	i.setValue ( - 6. 45 ) ;
+	&#x2F;&#x2F;调用add和output
+	j &#x3D; h.add(g);
+	h.output( ); 
+	cout &lt;&lt; &quot; + &quot;;
+	g.output( );
+	cout &lt;&lt; &quot; &#x3D; &quot;;
+	j.output( ); cout &lt;&lt; endl;
+	&#x2F;&#x2F;连续调用两次函数add
+	j &#x3D; i.add(g).add(h);
+	……&#x2F;&#x2F;省略输出语句
+	&#x2F;&#x2F;调用函数increment和add
+	j &#x3D; i. increment(g).add(h);
+	……&#x2F;&#x2F;省略输出语句
+        
+	&#x2F;&#x2F;测试异常
+	cout&lt;&lt; &quot; Attempting to inatialize with cents &#x3D;152&quot; &lt;&lt; endl;
+	try &#123;i.setValue(plus, 3, 152); &#125;
+	catch (illegalParameterValue e)
+	&#123;
+		cout&lt;&lt; “Caught thrown exception&quot; &lt;&lt; endl;
+		e.outputMessage();
+	&#125; 
+	return 0; 
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class currency &#123;
+	public :
+&#x2F;&#x2F;构造函数
+		currency(signType theSign &#x3D; plus, unsigned long theDollars &#x3D; 0, unsigned int theCents &#x3D; 0); 
+		currency operator+(const currency&amp; ) const;
+		currency&amp; operator+&#x3D;(const currency&amp; x)&#123;amount +&#x3D; x.amount; return *this;&#125;
+		void output(ostream&amp; out) const;
+	Private:
+		long amount;
+&#125; ;
+
+&#x2F;&#x2F;重载加号+
+currency currency::operator+(const currency&amp; x) const
+&#123;&#x2F;&#x2F;把参数对象x 和调用对象 *this相加.
+	currency result;
+	result.amount &#x3D; amount + x.amount;
+	return result;
+&#125;
+void currency::output(ostream&amp; out) const
+&#123;&#x2F;&#x2F;将货币值插入到输出流 .
+	long theAmount &#x3D; amount;
+	if (theAmount &lt; 0) &#123;out &lt;&lt; &#39;-&#39; ; theAmount &#x3D; -theAmount ; &#125;
+	long dollars &#x3D; theAmount &#x2F; 100; &#x2F;&#x2F; dollars
+	out &lt;&lt; &#39;$&#39; &lt;&lt; dollars &lt;&lt; &#39;.&#39; ;
+	int cents &#x3D; theAmount - dollars * 100; &#x2F;&#x2F; cents
+	if (cents &lt; 10) out &lt;&lt; &quot;0&quot;;
+	out &lt;&lt; cents;
+&#125;
+&#x2F;&#x2F;重载 &lt;&lt;
+ostream&amp; operator&lt;&lt;(ostream&amp; out, const currency&amp; x)&#123;
+    x.output(out); 
+    return out;
+&#125;
+
+&#x2F;&#x2F;使用重载后的操作符
+j &#x3D; h+g;
+cout &lt;&lt; h &lt;&lt; &quot; + &quot; &lt;&lt; g &lt;&lt; &quot; &#x3D; &quot; &lt;&lt; j &lt;&lt; endl; 
+
+j &#x3D; i+g+h;
+cout &lt;&lt; i &lt;&lt; &quot; + &quot; &lt;&lt; g &lt;&lt; &quot; + &quot; &lt;&lt; h &lt;&lt; &quot; &#x3D; &quot; &lt;&lt; j &lt;&lt; endl;
+
+j &#x3D; (i+&#x3D;g)+h;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="友元和保护性类成员"><a href="#友元和保护性类成员" class="headerlink" title="友元和保护性类成员"></a>友元和保护性类成员</h3><blockquote>
+<p>友元函数：</p>
+<p>在友元函数内部，可以访问该类对象的私有成员。</p>
+<p>友元类：</p>
+<p>一个类 A 可以将另一个类 B 声明为自己的友元，类 B 的所有成员函数就都可以访问类 A 对象的私有成员</p>
+</blockquote>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;把ostream&amp; operator&lt;&lt;描述为currency类的友元
+class currency &#123;
+	friend ostream&amp; operator &lt;&lt;(ostream&amp;, const currency&amp;);
+	Public:
+		………
+&#125;
+
+
+&#x2F;&#x2F;然后重载 &lt;&lt;运算符，就不用再
+ostream&amp; operator&lt;&lt;(ostream&amp; out, const currency&amp; x)
+&#123;&#x2F;&#x2F;把货币值插入到输出流
+	long theAmount &#x3D; x.amount;
+	if (theAmount &lt; 0) &#123;out &lt;&lt; &#39;-&#39; ; theAmount &#x3D; -theAmount;&#125;
+	long dollars &#x3D; theAmount &#x2F; 100; &#x2F;&#x2F;dollars
+	out &lt;&lt; &#39;$&#39; &lt;&lt; dollars &lt;&lt; &#39;.&#39; ;
+	int cents &#x3D; theAmount - dollars * 100; &#x2F;&#x2F; cents
+	if (cents &lt; 10) out &lt;&lt; &quot;0&quot;;
+	out &lt;&lt; cents;
+	return out;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>派生类可以访问保护性类成员 </p>
+</blockquote>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;保护性类成员
+class currency 
+&#123;
+	friend ostream&amp; operator &lt;&lt;(ostream&amp;, const currency&amp;);
+	Public:
+	…
+	Protected:
+	…		&#x2F;&#x2F;这里就是保护性类成员
+	Private:
+	…
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="异常类illegalParameterValue"><a href="#异常类illegalParameterValue" class="headerlink" title="异常类illegalParameterValue"></a>异常类illegalParameterValue</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class illegalParameterValue
+&#123;
+public:
+	illegalParameterValue():message(“Illegal Parameter Value“)&#123;&#125;&#x2F;&#x2F;无参构造函数（冒号后面是初始化）
+	illegalParameterValue(char* theMessage)&#123;message&#x3D; theMessage;&#125; &#x2F;&#x2F;含参构造函数
+	void outputmessage() &#123;cout&lt;&lt;message&lt;&lt;endl;&#125;&#x2F;&#x2F;一个普通的输出函数
+private:
+	string message;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h2><blockquote>
+<p>递归函数：递归函数是一个自己调用自己的函数。</p>
+</blockquote>
+<blockquote>
+<p>一个正确的递归函数必须包含： </p>
+<p>​	➢一个基本部分（递归的出口）</p>
+<p>​	➢递归调用部分</p>
+</blockquote>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;用递归实现的阶乘函数
+int f(int n)
+&#123; 
+if (n&lt;&#x3D;1) return 1; &#x2F;&#x2F;递归出口
+else return n*f(n-1);&#x2F;&#x2F;调用自身
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>递归优点： 递归简洁、易编写、易懂 易证明正确性 </p>
+<p>递归缺点： 递归效率低 重复计算多</p>
+</blockquote>
+<blockquote>
+<p>递归函数改为非递归： </p>
+<p>​		改为非递归的目的是提高效率 </p>
+<p>​		<strong>单向递归</strong>可直接用<strong>迭代</strong>实现非递归</p>
+<pre><code>     其他情形必须借助**栈**实现非递归
+</code></pre>
+</blockquote>
+<h2 id="标准模板库STL"><a href="#标准模板库STL" class="headerlink" title="标准模板库STL"></a>标准模板库STL</h2><blockquote>
+<p>C++标准模板库(STL)是一个<strong>容器</strong>、<strong>适配器</strong>、<strong>迭代器</strong> 、<strong>函数对象</strong>和<strong>算法</strong>的集合，使用STL，应用程序的 设计会简单很多。 </p>
+</blockquote>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="/statics/greatbug.mp3">
+            </audio>
+            
+            
+            <div class="post-nav">
+                <hr>
+                
+                
+                    <div class="post-nav-item">下一篇&nbsp:&nbsp&nbsp<a href="/2022/07/25/2022%E5%AD%A6%E7%BA%BF%E6%9A%91%E5%81%87%E5%AE%9E%E8%AE%AD%EF%BC%9A%E5%B1%B1%E5%A4%A7%E8%BF%B7%E8%B8%AA%E5%9B%BE%E7%89%87%E6%9C%8D%E5%8A%A1/" rel="next" 
+                        title="2022学线暑假实训：山大迷踪图片服务" style="color:black">2022学线暑假实训：山大迷踪图片服务</a></div>
+                                
+            </div>   
+                        
+            
+            
+            <div id="vcomments"></div>
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/avatar.png" height=300 width=300></img>
+                    <p>XUinRZ</p>
+                    <span>诗和远方都很贵，星辰大海也收费。</span>
+                    <dl>
+                        
+                            
+                                <dd><a href="https://www.github.com/xuinrz/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ri icon" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" data-icon="ri:github-line"><path fill="purple" d="M5.883 18.653c-.3-.2-.558-.455-.86-.816a50.32 50.32 0 0 1-.466-.579c-.463-.575-.755-.84-1.057-.949a1 1 0 0 1 .676-1.883c.752.27 1.261.735 1.947 1.588c-.094-.117.34.427.433.539c.19.227.33.365.44.438c.204.137.587.196 1.15.14c.023-.382.094-.753.202-1.095C5.38 15.31 3.7 13.396 3.7 9.64c0-1.24.37-2.356 1.058-3.292c-.218-.894-.185-1.975.302-3.192a1 1 0 0 1 .63-.582c.081-.024.127-.035.208-.047c.803-.123 1.937.17 3.415 1.096A11.731 11.731 0 0 1 12 3.315c.912 0 1.818.104 2.684.308c1.477-.933 2.613-1.226 3.422-1.096c.085.013.157.03.218.05a1 1 0 0 1 .616.58c.487 1.216.52 2.297.302 3.19c.691.936 1.058 2.045 1.058 3.293c0 3.757-1.674 5.665-4.642 6.392c.125.415.19.879.19 1.38a300.492 300.492 0 0 1-.012 2.716a1 1 0 0 1-.019 1.958c-1.139.228-1.983-.532-1.983-1.525l.002-.446l.005-.705c.005-.708.007-1.338.007-1.998c0-.697-.183-1.152-.425-1.36c-.661-.57-.326-1.655.54-1.752c2.967-.333 4.337-1.482 4.337-4.66c0-.955-.312-1.744-.913-2.404a1 1 0 0 1-.19-1.045c.166-.414.237-.957.096-1.614l-.01.003c-.491.139-1.11.44-1.858.949a1 1 0 0 1-.833.135A9.626 9.626 0 0 0 12 5.315c-.89 0-1.772.119-2.592.35a1 1 0 0 1-.83-.134c-.752-.507-1.374-.807-1.868-.947c-.144.653-.073 1.194.092 1.607a1 1 0 0 1-.189 1.045C6.016 7.89 5.7 8.694 5.7 9.64c0 3.172 1.371 4.328 4.322 4.66c.865.097 1.201 1.177.544 1.748c-.192.168-.429.732-.429 1.364v3.15c0 .986-.835 1.725-1.96 1.528a1 1 0 0 1-.04-1.962v-.99c-.91.061-1.662-.088-2.254-.485z"></path></svg></a></dd>
+                            
+                            
+                                <dd><a href="http://wpa.qq.com/msgrd?v=3&uin=2806229200&site=qq&menu=yes" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ri icon" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" data-icon="ri:qq-line"><path fill="aqua" d="m17.535 12.514l-.696-1.796c0-.021.01-.375.01-.558C16.848 7.088 15.446 4 12 4s-4.848 3.088-4.848 6.16c0 .183.009.537.01.558l-.696 1.796c-.19.515-.38 1.05-.517 1.51c-.657 2.189-.444 3.095-.282 3.115c.348.043 1.354-1.648 1.354-1.648c0 .98.488 2.258 1.542 3.18c-.394.127-.878.32-1.188.557c-.28.214-.245.431-.194.52c.22.385 3.79.245 4.82.125c1.03.12 4.599.26 4.82-.126c.05-.088.085-.305-.194-.519c-.311-.237-.795-.43-1.19-.556c1.055-.923 1.542-2.202 1.542-3.181c0 0 1.007 1.691 1.355 1.648c.162-.02.378-.928-.283-3.116c-.14-.463-.325-.994-.516-1.509zm1.021 8.227c-.373.652-.833.892-1.438 1.057a4.91 4.91 0 0 1-.794.138c-.44.045-.986.065-1.613.064a33.23 33.23 0 0 1-2.71-.116c-.692.065-1.785.114-2.71.116a16.07 16.07 0 0 1-1.614-.064a4.928 4.928 0 0 1-.793-.138c-.605-.164-1.065-.405-1.44-1.059a2.274 2.274 0 0 1-.239-1.652c-.592-.132-1.001-.483-1.279-.911a2.43 2.43 0 0 1-.309-.71a4.028 4.028 0 0 1-.116-1.106c.013-.785.187-1.762.532-2.912c.14-.466.327-1.008.568-1.655l.553-1.43a15.496 15.496 0 0 1-.002-.203C5.152 5.605 7.588 2 12 2c4.413 0 6.848 3.605 6.848 8.16l-.001.203l.553 1.43l.01.026c.225.606.413 1.153.556 1.626c.348 1.15.522 2.129.535 2.916c.007.407-.03.776-.118 1.108c-.066.246-.161.48-.31.708c-.276.427-.684.776-1.277.91c.13.554.055 1.14-.24 1.654z"></path></svg></a></dd>
+                            
+                            
+                                <dd><a href="https://space.bilibili.com/475113082" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ri icon" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" data-icon="ri:bilibili-line"><path fill="hotpink" d="M7.172 2.757L10.414 6h3.171l3.243-3.242a1 1 0 0 1 1.415 1.415L16.414 6H18.5A3.5 3.5 0 0 1 22 9.5v8a3.5 3.5 0 0 1-3.5 3.5h-13A3.5 3.5 0 0 1 2 17.5v-8A3.5 3.5 0 0 1 5.5 6h2.085L5.757 4.171a1 1 0 0 1 1.415-1.415zM18.5 8h-13a1.5 1.5 0 0 0-1.493 1.356L4 9.5v8a1.5 1.5 0 0 0 1.356 1.493L5.5 19h13a1.5 1.5 0 0 0 1.493-1.356L20 17.5v-8A1.5 1.5 0 0 0 18.5 8zM8 11a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1zm8 0a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1z"></path></svg></a></dd>
+                            
+                        
+                        
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">5 <p>文章</p></a></li>
+                    <li><a href="/categories">5 <p>分类</p></a></li>
+                    <li><a href="/tags">7 <p>标签</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>目录</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-%E5%A4%8D%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">C++复习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%82%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">函数与参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">1.1.1.</span> <span class="toc-text">参数传递</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">函数返回方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">重载函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-number">1.2.</span> <span class="toc-text">异常</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-number">1.2.1.</span> <span class="toc-text">抛出异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%95%E8%8E%B7%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8"><span class="toc-number">1.2.2.</span> <span class="toc-text">捕获处理异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4"><span class="toc-number">1.3.</span> <span class="toc-text">动态存储空间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6new-%E5%8F%AF%E7%94%A8%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8A%A8%E6%80%81%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D%EF%BC%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">操作符new 可用来进行动态存储分配：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.3.2.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6-delete-%E9%87%8A%E6%94%BE%E7%94%B1%E6%93%8D%E4%BD%9C%E7%AC%A6new%E6%89%80%E5%88%86%E9%85%8D%E7%9A%84%E7%A9%BA%E9%97%B4"><span class="toc-number">1.3.3.</span> <span class="toc-text">操作符 delete    释放由操作符new所分配的空间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.</span> <span class="toc-text">自有数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="toc-number">1.4.1.</span> <span class="toc-text">操作符重载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8B%E5%85%83%E5%92%8C%E4%BF%9D%E6%8A%A4%E6%80%A7%E7%B1%BB%E6%88%90%E5%91%98"><span class="toc-number">1.4.2.</span> <span class="toc-text">友元和保护性类成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E7%B1%BBillegalParameterValue"><span class="toc-number">1.5.</span> <span class="toc-text">异常类illegalParameterValue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="toc-number">1.6.</span> <span class="toc-text">递归函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93STL"><span class="toc-number">1.7.</span> <span class="toc-text">标准模板库STL</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+    <!-- 博客总字数 -->
+        <span style="color:#9e9e9e"><b class="iconfont icon-text2"></b>&nbsp字数&nbsp<span class="gradient-text">10.5k</span>&nbsp字</span>&nbsp&nbsp
+        
+    <!-- 不蒜子统计 -->
+    <span style="color:#9e9e9e">
+        <b class="iconfont icon-read"></b>&nbsp阅读&nbsp<span class="gradient-text" id="busuanzi_value_site_pv" style="color:#9e9e9e"></span>&nbsp次
+    </span>
+    <script async>var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="none")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};</script>
+        
+    </p>
+
+    <p class="copyright" id="copyright"><span id="timeDate" style="color:#9e9e9e">载入天数...</span><span id="times" style="color:#9e9e9e">载入时分秒...</span>
+        <script>
+            var now = new Date(); 
+            function createtime() { 
+                var grt= new Date("06/28/2022 00:00:00");//在此处修改你的建站时间
+                now.setTime(now.getTime()+250); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                document.getElementById("timeDate").innerHTML = "本站已安全运行 <span class='gradient-text'>"+dnum+"</span> 天 "; 
+                document.getElementById("times").innerHTML ="<span class='gradient-text'>"+ hnum + "</span> 时 <span class='gradient-text'>" + mnum + "</span> 分 <span class='gradient-text'>" + snum + "</span> 秒"; 
+            } 
+        setInterval("createtime()",250);
+        </script>
+    </p>
+
+    <p class="copyright" id="copyright">
+        &copy; 2022
+        <span class="gradient-text">
+            XUinRZ
+        </span>.
+        Powered by <span class="gradient-text">
+            <a href="https://www.hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        </span>
+        &
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <!-- <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.9.3" target="_blank" rel="noopener">v1.4.9.3</a></small> -->
+        
+        
+    </p>
+    
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+ 
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+ 
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+ 
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+ 
+<!-- 
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+ -->
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+ 
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+   
+<script src="/js/busuanzi.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    if ($('span[id^="busuanzi_"]').length) {
+      initialBusuanzi();
+    }
+  });
+</script>
+ 
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+<script>
+  function initialTyped() {
+    var typedTextEl = $('.typed-text');
+    if (typedTextEl && typedTextEl.length > 0) {
+      var typed = new Typed('.typed-text', {
+        strings: ['诗和远方都很贵，星辰大海也收费。', '短暂的热血是未来给自己的求救信号。', '笔落惊风雨，诗成泣鬼神。', '做这个人的战士，和他一起去经历，失败。'],
+        typeSpeed: 90,
+        loop: true,
+        loopCount: Infinity,
+        backSpeed: 20,
+      });
+    }
+  }
+
+  if ($('.article-header') && $('.article-header').length) {
+    $(document).ready(function () {
+      initialTyped();
+    });
+  }
+</script>
+
+ 
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var valine = new Valine();
+
+  function initValine(path) {
+    if (!path) path = window.location.pathname;
+    let language = 'zh-CN';
+    if (!language) {
+      language = 'en';
+    } else {
+      language = language.toLowerCase();
+    }
+    valine.init({
+      el: '#vcomments',
+      appId: 'EfdJOgVXCUfsmnwzx1skxMOt-gzGzoHsz',
+      appKey: 'u9L0mPHaP2tGf8BuOtmAdbD2',
+      notify: 'false',
+      verify: 'false',
+      avatar: 'mp',
+      placeholder: '欢迎留言~~\n如需显示您的头像，请在cn.gravatar.com 配置',
+      visitor: 'true',
+      path: path,
+      lang: language,
+    });
+  }
+
+  $(document).ready(function () {
+    initValine();
+  });
+</script>
+
+
+
+<!-- 引用依赖 -->
+<script>document.write(aplayerconf)</script>
+
+
+
+
+</html>
