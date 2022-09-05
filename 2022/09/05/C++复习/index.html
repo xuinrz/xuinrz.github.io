@@ -11,10 +11,10 @@
     <meta name="google" content="notranslate" />
     <script src="/js/anime.min.js"></script>
     <meta name="keywords" content="自旋 博客 SPIN spin XUinRZ xuinrz,"> 
-    <meta name="description" content="C++复习
+    <meta name="description" content="
 本文参考《数据结构、算法与应用  C++语言描述  原书第2版》第一章中复习c++的思路
 
-函数与参数参数传递值传递Value Parametersint calculate(int a,"> 
+函数与参数参数传递值传递Value Parametersint calculate(int a,int ,"> 
     <meta name="author" content="XUinRZ"> 
     <link rel="alternative" href="atom.xml" title="SPIN" type="application/atom+xml"> 
     <link rel="icon" href="/img/avatar.png"> 
@@ -169,38 +169,38 @@
             style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"
             ></canvas>
             <script src="/js/background.js"></script>
-            <h1 id="C-复习"><a href="#C-复习" class="headerlink" title="C++复习"></a>C++复习</h1><blockquote>
+            <blockquote>
 <p>本文参考《数据结构、算法与应用  C++语言描述  原书第2版》第一章中复习c++的思路</p>
 </blockquote>
-<h2 id="函数与参数"><a href="#函数与参数" class="headerlink" title="函数与参数"></a>函数与参数</h2><h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><h4 id="值传递Value-Parameters"><a href="#值传递Value-Parameters" class="headerlink" title="值传递Value Parameters"></a>值传递Value Parameters</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int calculate(int a,int b,int c)&#123;return a+b+b*c+4;&#125;
+<h1 id="函数与参数"><a href="#函数与参数" class="headerlink" title="函数与参数"></a>函数与参数</h1><h2 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h2><h3 id="值传递Value-Parameters"><a href="#值传递Value-Parameters" class="headerlink" title="值传递Value Parameters"></a>值传递Value Parameters</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int calculate(int a,int b,int c)&#123;return a+b+b*c+4;&#125;
 int m&#x3D;20, x&#x3D;10, y&#x3D;15,z;
 z &#x3D; calculate(m,x,y);&#x2F;&#x2F;这个过程会将把局部变量abc复制构造成mxy，方法结束后再析构
 &#x2F;&#x2F;效率低（比如大型矩阵传值）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="引用传递Reference-Parameters"><a href="#引用传递Reference-Parameters" class="headerlink" title="引用传递Reference Parameters"></a>引用传递Reference Parameters</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int calculate(int &amp;a,int &amp;b,int &amp;c)&#123;return a+b+b*c+4;&#125;
+<h3 id="引用传递Reference-Parameters"><a href="#引用传递Reference-Parameters" class="headerlink" title="引用传递Reference Parameters"></a>引用传递Reference Parameters</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int calculate(int &amp;a,int &amp;b,int &amp;c)&#123;return a+b+b*c+4;&#125;
 int m&#x3D;20, x&#x3D;10, y&#x3D;15,z;
 z &#x3D; calculate(m,x,y);&#x2F;&#x2F;这个过程会将把abc指向mxy的地址，比较快
 &#x2F;&#x2F;对于int、float这种简单的基本数据类型，其实可以直接使用值传递；而其他数据类型比较复杂，应该用引用传递<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="常量引用传递Const-Reference-Parameters"><a href="#常量引用传递Const-Reference-Parameters" class="headerlink" title="常量引用传递Const Reference Parameters"></a>常量引用传递Const Reference Parameters</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">template &lt;class Ta, class Tb , class Tc&gt;
+<h3 id="常量引用传递Const-Reference-Parameters"><a href="#常量引用传递Const-Reference-Parameters" class="headerlink" title="常量引用传递Const Reference Parameters"></a>常量引用传递Const Reference Parameters</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">template &lt;class Ta, class Tb , class Tc&gt;
 Ta abc(const Ta&amp; a, const Tb&amp; b, const Tc&amp; c)
 &#123;return a+b*c;&#125; 
 &#x2F;&#x2F;当函数不会修改实际参数值(只读)的时候可以采用常量引用参数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
-<h3 id="函数返回方式"><a href="#函数返回方式" class="headerlink" title="函数返回方式"></a>函数返回方式</h3><h4 id="值返回Return-Value"><a href="#值返回Return-Value" class="headerlink" title="值返回Return Value"></a>值返回Return Value</h4><p>​	直接复制一份被返回的东西</p>
-<h4 id="引用返回Return-Reference"><a href="#引用返回Return-Reference" class="headerlink" title="引用返回Return Reference"></a>引用返回Return Reference</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">T&amp; X(int i, T&amp; a)
+<h2 id="函数返回方式"><a href="#函数返回方式" class="headerlink" title="函数返回方式"></a>函数返回方式</h2><h3 id="值返回Return-Value"><a href="#值返回Return-Value" class="headerlink" title="值返回Return Value"></a>值返回Return Value</h3><p>​	直接复制一份被返回的东西</p>
+<h3 id="引用返回Return-Reference"><a href="#引用返回Return-Reference" class="headerlink" title="引用返回Return Reference"></a>引用返回Return Reference</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">T&amp; X(int i, T&amp; a)
 &#123;……
 Return a; 
 &#125;
 &#x2F;&#x2F;只返回一个引用，不会把该引用对应的值复制到返回环境中<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>​	只返回一个引用，不会把该引用对应的值复制到环境中</p>
-<h4 id="常量引用返回Return-Const-Reference"><a href="#常量引用返回Return-Const-Reference" class="headerlink" title="常量引用返回Return Const Reference"></a>常量引用返回Return Const Reference</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Const T&amp; X(int i,T&amp; z)
+<h3 id="常量引用返回Return-Const-Reference"><a href="#常量引用返回Return-Const-Reference" class="headerlink" title="常量引用返回Return Const Reference"></a>常量引用返回Return Const Reference</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Const T&amp; X(int i,T&amp; z)
 &#x2F;&#x2F;返回的结果是一个不变化的对象（？？？没看明明白）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="重载函数"><a href="#重载函数" class="headerlink" title="重载函数"></a>重载函数</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int abc(int a, int b, int c)
+<h2 id="重载函数"><a href="#重载函数" class="headerlink" title="重载函数"></a>重载函数</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int abc(int a, int b, int c)
 &#123;return a+b*c;&#125;
 &#x2F;&#x2F;重载abc
 float abc(float a, float b, float c)
@@ -209,14 +209,14 @@ float abc(float a, float b, float c)
 
 
 
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int abc(int a, int b, int c)
+<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><h2 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int abc(int a, int b, int c)
 &#123;
 if(a&lt;&#x3D;0 || b&lt;&#x3D;0 || c&lt;&#x3D;0 )
 	throw “All parameters should be &gt;0” ; &#x2F;&#x2F;抛出了一个类型为char*的异常
 return a+b*c;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="捕获处理异常"><a href="#捕获处理异常" class="headerlink" title="捕获处理异常"></a>捕获处理异常</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int main()&#123;
+<h2 id="捕获处理异常"><a href="#捕获处理异常" class="headerlink" title="捕获处理异常"></a>捕获处理异常</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int main()&#123;
 	try (cout&lt;&lt;abc(2,0,4)&lt;&lt;endl; )
 	catch (char* e)&#x2F;&#x2F;当捕捉到char*类型异常时，执行下面的语句：
 		&#123;
@@ -230,7 +230,7 @@ return a+b*c;
 
 
 
-<h2 id="动态存储空间"><a href="#动态存储空间" class="headerlink" title="动态存储空间"></a>动态存储空间</h2><blockquote>
+<h1 id="动态存储空间"><a href="#动态存储空间" class="headerlink" title="动态存储空间"></a>动态存储空间</h1><blockquote>
 <p> C&#x2F;C++定义了4个内存区间：</p>
 <ol>
 <li><p><strong>代码区</strong> </p>
@@ -247,7 +247,7 @@ return a+b*c;
 <p>一般定义变量（或对象）时，编译器是知道它的大小的，可以直接分配内存；这种方式称为<strong>静态存储分配</strong>。</p>
 <p>而有些对象只有运行时才知道大小，编译时就无法指定存储空间，这时要采用<strong>动态存储分配</strong>（此时记得要释放内存）。动态存储分配都在<strong>堆区（动态存储区）</strong>进行。</p>
 </blockquote>
-<h3 id="操作符new-可用来进行动态存储分配："><a href="#操作符new-可用来进行动态存储分配：" class="headerlink" title="操作符new 可用来进行动态存储分配："></a>操作符new 可用来进行动态存储分配：</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int *y ;&#x2F;&#x2F;定义一个int类型指针
+<h2 id="操作符new-可用来进行动态存储分配："><a href="#操作符new-可用来进行动态存储分配：" class="headerlink" title="操作符new 可用来进行动态存储分配："></a>操作符new 可用来进行动态存储分配：</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int *y ;&#x2F;&#x2F;定义一个int类型指针
 y&#x3D;new int;&#x2F;&#x2F;让它 &#x3D; 一个指向int大小的动态空间的指针
 *y &#x3D; 10; &#x2F;&#x2F;赋值操作
 
@@ -281,7 +281,7 @@ bool make2dArray (T** &amp;x, int Rows, int columns)
 
 
 
-<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">float *x;
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">float *x;
 try &#123;x &#x3D; new float [n];&#125;
 catch (bad_alloc) &#123; &#x2F;&#x2F;内存不足 bad_alloc
 	cerr &lt;&lt; &quot;Out of Memory&quot; &lt;&lt; endl;
@@ -298,7 +298,7 @@ catch (bad_alloc) &#123;
 
 
 
-<h3 id="操作符-delete-释放由操作符new所分配的空间"><a href="#操作符-delete-释放由操作符new所分配的空间" class="headerlink" title="操作符 delete    释放由操作符new所分配的空间"></a>操作符 delete    释放由操作符new所分配的空间</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int *y &#x3D; new int (10);
+<h2 id="操作符-delete-释放由操作符new所分配的空间"><a href="#操作符-delete-释放由操作符new所分配的空间" class="headerlink" title="操作符 delete    释放由操作符new所分配的空间"></a>操作符 delete    释放由操作符new所分配的空间</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int *y &#x3D; new int (10);
 Delete y;
 float *x&#x3D;new float[n];
 Delete []x;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
@@ -316,7 +316,7 @@ void delete2dArray( T** &amp;x, int Rows)&#x2F;&#x2F;这里只需要传入行数
 
 
 
-<h2 id="自有数据类型"><a href="#自有数据类型" class="headerlink" title="自有数据类型"></a>自有数据类型</h2><p>下面以货币类currency为例（有点长，耐心记下来）：</p>
+<h1 id="自有数据类型"><a href="#自有数据类型" class="headerlink" title="自有数据类型"></a>自有数据类型</h1><p>下面以货币类currency为例（有点长，耐心记下来）：</p>
 <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;先枚举出来正负号的表达方式
 enum signType &#123;plus, minus&#125;;
 &#x2F;&#x2F;声明货币类，和其中的几个方法
@@ -448,7 +448,7 @@ int main ()
 	return 0; 
 &#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class currency &#123;
+<h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class currency &#123;
 	public :
 &#x2F;&#x2F;构造函数
 		currency(signType theSign &#x3D; plus, unsigned long theDollars &#x3D; 0, unsigned int theCents &#x3D; 0); 
@@ -492,7 +492,7 @@ cout &lt;&lt; i &lt;&lt; &quot; + &quot; &lt;&lt; g &lt;&lt; &quot; + &quot; &lt
 j &#x3D; (i+&#x3D;g)+h;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="友元和保护性类成员"><a href="#友元和保护性类成员" class="headerlink" title="友元和保护性类成员"></a>友元和保护性类成员</h3><blockquote>
+<h2 id="友元和保护性类成员"><a href="#友元和保护性类成员" class="headerlink" title="友元和保护性类成员"></a>友元和保护性类成员</h2><blockquote>
 <p>友元函数：</p>
 <p>在友元函数内部，可以访问该类对象的私有成员。</p>
 <p>友元类：</p>
@@ -534,7 +534,7 @@ class currency
 	…
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="异常类illegalParameterValue"><a href="#异常类illegalParameterValue" class="headerlink" title="异常类illegalParameterValue"></a>异常类illegalParameterValue</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class illegalParameterValue
+<h1 id="异常类illegalParameterValue"><a href="#异常类illegalParameterValue" class="headerlink" title="异常类illegalParameterValue"></a>异常类illegalParameterValue</h1><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class illegalParameterValue
 &#123;
 public:
 	illegalParameterValue():message(“Illegal Parameter Value“)&#123;&#125;&#x2F;&#x2F;无参构造函数（冒号后面是初始化）
@@ -546,7 +546,7 @@ private:
 
 
 
-<h2 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h2><blockquote>
+<h1 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h1><blockquote>
 <p>递归函数：递归函数是一个自己调用自己的函数。</p>
 </blockquote>
 <blockquote>
@@ -572,7 +572,7 @@ else return n*f(n-1);&#x2F;&#x2F;调用自身
 <pre><code>     其他情形必须借助**栈**实现非递归
 </code></pre>
 </blockquote>
-<h2 id="标准模板库STL"><a href="#标准模板库STL" class="headerlink" title="标准模板库STL"></a>标准模板库STL</h2><blockquote>
+<h1 id="标准模板库STL"><a href="#标准模板库STL" class="headerlink" title="标准模板库STL"></a>标准模板库STL</h1><blockquote>
 <p>C++标准模板库(STL)是一个<strong>容器</strong>、<strong>适配器</strong>、<strong>迭代器</strong> 、<strong>函数对象</strong>和<strong>算法</strong>的集合，使用STL，应用程序的 设计会简单很多。 </p>
 </blockquote>
 
@@ -630,7 +630,7 @@ else return n*f(n-1);&#x2F;&#x2F;调用自身
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-%E5%A4%8D%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">C++复习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%82%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">函数与参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">1.1.1.</span> <span class="toc-text">参数传递</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">函数返回方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">重载函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-number">1.2.</span> <span class="toc-text">异常</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-number">1.2.1.</span> <span class="toc-text">抛出异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%95%E8%8E%B7%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8"><span class="toc-number">1.2.2.</span> <span class="toc-text">捕获处理异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4"><span class="toc-number">1.3.</span> <span class="toc-text">动态存储空间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6new-%E5%8F%AF%E7%94%A8%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8A%A8%E6%80%81%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D%EF%BC%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">操作符new 可用来进行动态存储分配：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.3.2.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6-delete-%E9%87%8A%E6%94%BE%E7%94%B1%E6%93%8D%E4%BD%9C%E7%AC%A6new%E6%89%80%E5%88%86%E9%85%8D%E7%9A%84%E7%A9%BA%E9%97%B4"><span class="toc-number">1.3.3.</span> <span class="toc-text">操作符 delete    释放由操作符new所分配的空间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.</span> <span class="toc-text">自有数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="toc-number">1.4.1.</span> <span class="toc-text">操作符重载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8B%E5%85%83%E5%92%8C%E4%BF%9D%E6%8A%A4%E6%80%A7%E7%B1%BB%E6%88%90%E5%91%98"><span class="toc-number">1.4.2.</span> <span class="toc-text">友元和保护性类成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E7%B1%BBillegalParameterValue"><span class="toc-number">1.5.</span> <span class="toc-text">异常类illegalParameterValue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="toc-number">1.6.</span> <span class="toc-text">递归函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93STL"><span class="toc-number">1.7.</span> <span class="toc-text">标准模板库STL</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%82%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">函数与参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">1.1.</span> <span class="toc-text">参数传递</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%80%BC%E4%BC%A0%E9%80%92Value-Parameters"><span class="toc-number">1.1.1.</span> <span class="toc-text">值传递Value Parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92Reference-Parameters"><span class="toc-number">1.1.2.</span> <span class="toc-text">引用传递Reference Parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92Const-Reference-Parameters"><span class="toc-number">1.1.3.</span> <span class="toc-text">常量引用传递Const Reference Parameters</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">函数返回方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%80%BC%E8%BF%94%E5%9B%9EReturn-Value"><span class="toc-number">1.2.1.</span> <span class="toc-text">值返回Return Value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%BF%94%E5%9B%9EReturn-Reference"><span class="toc-number">1.2.2.</span> <span class="toc-text">引用返回Return Reference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F%E5%BC%95%E7%94%A8%E8%BF%94%E5%9B%9EReturn-Const-Reference"><span class="toc-number">1.2.3.</span> <span class="toc-text">常量引用返回Return Const Reference</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">重载函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-number">2.</span> <span class="toc-text">异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-number">2.1.</span> <span class="toc-text">抛出异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%95%E8%8E%B7%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8"><span class="toc-number">2.2.</span> <span class="toc-text">捕获处理异常</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4"><span class="toc-number">3.</span> <span class="toc-text">动态存储空间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6new-%E5%8F%AF%E7%94%A8%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8A%A8%E6%80%81%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">操作符new 可用来进行动态存储分配：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6-delete-%E9%87%8A%E6%94%BE%E7%94%B1%E6%93%8D%E4%BD%9C%E7%AC%A6new%E6%89%80%E5%88%86%E9%85%8D%E7%9A%84%E7%A9%BA%E9%97%B4"><span class="toc-number">3.3.</span> <span class="toc-text">操作符 delete    释放由操作符new所分配的空间</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">自有数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="toc-number">4.1.</span> <span class="toc-text">操作符重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8B%E5%85%83%E5%92%8C%E4%BF%9D%E6%8A%A4%E6%80%A7%E7%B1%BB%E6%88%90%E5%91%98"><span class="toc-number">4.2.</span> <span class="toc-text">友元和保护性类成员</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E7%B1%BBillegalParameterValue"><span class="toc-number">5.</span> <span class="toc-text">异常类illegalParameterValue</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">递归函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93STL"><span class="toc-number">7.</span> <span class="toc-text">标准模板库STL</span></a></li></ol>
                 </div>
             </div>
             
