@@ -1929,7 +1929,7 @@ h1.title {
   display: none;
 }
 .article {
-  padding: 2em 14em;
+  padding: 2em 9em 2em 17em;
   margin: 0;
   animation-delay: 400ms;
   animation-duration: 800ms;
