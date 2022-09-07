@@ -131,13 +131,13 @@ border-radius:25px;
 
                 <span title="post.wordcount">
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    884
+                    1.4k
                 </span>
                 
                 
                 <span >
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    6&nbspmins
+                    10&nbspmins
                 </span>
                 
                 
@@ -325,7 +325,104 @@ border-radius:25px;
 
 <img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220907100020331.png" class="" title="image-20220907100020331">
 
-<h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1>
+<h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><p>我们通过@keyframes 来声明一个动画，并在某个元素的animation属性上绑定该动画</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token property">width</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span><span class="token property">height</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span><span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+	<span class="token property">animation</span><span class="token punctuation">:</span>myfirst 5s<span class="token punctuation">;</span><span class="token comment">/* 绑定动画，并指定播放时长 */</span>
+<span class="token punctuation">&#125;</span>
+
+@keyframes myfirst<span class="token comment">/* 声明一个名为myfirst的动画 */</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token selector">from</span> <span class="token punctuation">&#123;</span><span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+	<span class="token selector">to</span> <span class="token punctuation">&#123;</span><span class="token property">background</span><span class="token punctuation">:</span>yellow<span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token comment">/* 使用from、to来指定始末态 */</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>（动画效果不在此处展示）</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token property">width</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span><span class="token property">height</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span><span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+	<span class="token property">animation</span><span class="token punctuation">:</span>myfirst 5s<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token atrule"><span class="token rule">@keyframes</span> myfirst</span>
+<span class="token punctuation">&#123;</span><span class="token comment">/* 使用百分比来指定动画播放到某时间点，达到某状态 */</span>
+	<span class="token selector">0%</span>   <span class="token punctuation">&#123;</span><span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span> <span class="token property">left</span><span class="token punctuation">:</span>0px<span class="token punctuation">;</span> <span class="token property">top</span><span class="token punctuation">:</span>0px<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+	<span class="token selector">25%</span>  <span class="token punctuation">&#123;</span><span class="token property">background</span><span class="token punctuation">:</span>yellow<span class="token punctuation">;</span> <span class="token property">left</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span> <span class="token property">top</span><span class="token punctuation">:</span>0px<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+	<span class="token selector">50%</span>  <span class="token punctuation">&#123;</span><span class="token property">background</span><span class="token punctuation">:</span>blue<span class="token punctuation">;</span> <span class="token property">left</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span> <span class="token property">top</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+	<span class="token selector">75%</span>  <span class="token punctuation">&#123;</span><span class="token property">background</span><span class="token punctuation">:</span>green<span class="token punctuation">;</span> <span class="token property">left</span><span class="token punctuation">:</span>0px<span class="token punctuation">;</span> <span class="token property">top</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+	<span class="token selector">100%</span> <span class="token punctuation">&#123;</span><span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span> <span class="token property">left</span><span class="token punctuation">:</span>0px<span class="token punctuation">;</span> <span class="token property">top</span><span class="token punctuation">:</span>0px<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>（动画效果不在此处展示）</p>
+<p>其实animation属性还有更多可用值，本文不再描述。<a target="_blank" rel="noopener" href="https://www.runoob.com/css3/css3-animations.html">参考网站</a></p>
+<h1 id="多列（分栏）"><a href="#多列（分栏）" class="headerlink" title="多列（分栏）"></a>多列（分栏）</h1><h2 id="列数column-count"><a href="#列数column-count" class="headerlink" title="列数	column-count"></a>列数	column-count</h2><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.newspaper</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token property">column-count</span><span class="token punctuation">:</span>3<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220907230812064.png" class="" title="image-20220907230812064">
+
+<h2 id="列间隙column-gap"><a href="#列间隙column-gap" class="headerlink" title="列间隙	column-gap"></a>列间隙	column-gap</h2><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.newspaper</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token property">column-count</span><span class="token punctuation">:</span>3<span class="token punctuation">;</span>
+	<span class="token property">column-gap</span><span class="token punctuation">:</span>120px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220907230858969.png" class="" title="image-20220907230858969">
+
+<h2 id="列分割线column-rule"><a href="#列分割线column-rule" class="headerlink" title="列分割线	column-rule"></a>列分割线	column-rule</h2><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.newspaper</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token property">column-count</span><span class="token punctuation">:</span>3<span class="token punctuation">;</span>
+	<span class="token property">column-rule</span><span class="token punctuation">:</span>4px outset #ff00ff<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220907230950236.png" class="" title="image-20220907230950236">
+
+<h2 id="跨列能力column-span"><a href="#跨列能力column-span" class="headerlink" title="跨列能力	column-span"></a>跨列能力	column-span</h2><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token property">column-count</span><span class="token punctuation">:</span>3<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">h2</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token property">column-span</span><span class="token punctuation">:</span>all<span class="token punctuation">;</span><span class="token comment">/* h2是div的子元素 */</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220907231043475.png" class="" title="image-20220907231043475">
+
+<h2 id="列宽-column-width"><a href="#列宽-column-width" class="headerlink" title="列宽 	column-width"></a>列宽 	column-width</h2><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.newspaper</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token property">column-width</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span><span class="token comment">/* 可以脱离column-count，直接生成分栏效果 */</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220907231155890.png" class="" title="image-20220907231155890">
+
+<h1 id="用户界面"><a href="#用户界面" class="headerlink" title="用户界面"></a>用户界面</h1><h2 id="自定义尺寸resize"><a href="#自定义尺寸resize" class="headerlink" title="自定义尺寸	resize"></a>自定义尺寸	resize</h2><p>resize可选值有：both、horizontal、vertical，分别是自由变动大小、只能自由变动宽度、只能自由变动高度</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token property">border</span><span class="token punctuation">:</span>2px solid<span class="token punctuation">;</span><span class="token property">width</span><span class="token punctuation">:</span>300px<span class="token punctuation">;</span>
+	<span class="token property">resize</span><span class="token punctuation">:</span>both<span class="token punctuation">;</span><span class="token comment">/* resize需要和overflow搭配！！！ */</span>
+	<span class="token property">overflow</span><span class="token punctuation">:</span>auto<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="方框尺寸box-sizing"><a href="#方框尺寸box-sizing" class="headerlink" title="方框尺寸	box-sizing"></a>方框尺寸	box-sizing</h2><p>此属性定义该元素尺寸的计算方式：（默认值为content-box）</p>
+<p>content-box：假设你指定width为100px，那么这个盒子的大小&#x3D;100+边框+内边距</p>
+<p>border-box：假设你指定width为100px，那么这个盒子的大小&#x3D;100-边框-内边距</p>
+<p>inherit：从父元素继承box-sizing属性</p>
+<h2 id="外轮廓outline"><a href="#外轮廓outline" class="headerlink" title="外轮廓	outline"></a>外轮廓	outline</h2><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div</span>
+<span class="token punctuation">&#123;</span>	
+	<span class="token property">width</span><span class="token punctuation">:</span>150px<span class="token punctuation">;</span> <span class="token property">height</span><span class="token punctuation">:</span>70px<span class="token punctuation">;</span><span class="token property">border</span><span class="token punctuation">:</span>2px solid black<span class="token punctuation">;</span>
+	<span class="token property">outline</span><span class="token punctuation">:</span>2px solid red<span class="token punctuation">;</span><span class="token comment">/* 指定外轮廓的样式 */</span>
+	<span class="token property">outline-offset</span><span class="token punctuation">:</span>15px<span class="token punctuation">;</span><span class="token comment">/* 指定外轮廓离border的距离 */</span>
+<span class="token punctuation">&#125;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+<h1 id="弹性盒子重点！！！"><a href="#弹性盒子重点！！！" class="headerlink" title="弹性盒子	重点！！！"></a><u>弹性盒子	重点！！！</u></h1><h1 id="媒体监测-media"><a href="#媒体监测-media" class="headerlink" title="媒体监测	@media"></a>媒体监测	@media</h1><h1 id="网格布局技巧"><a href="#网格布局技巧" class="headerlink" title="网格布局技巧"></a>网格布局技巧</h1><h1 id="图片技巧"><a href="#图片技巧" class="headerlink" title="图片技巧"></a>图片技巧</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="按钮技巧"><a href="#按钮技巧" class="headerlink" title="按钮技巧"></a>按钮技巧</h1><h1 id="翻页按钮技巧"><a href="#翻页按钮技巧" class="headerlink" title="翻页按钮技巧"></a>翻页按钮技巧</h1>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
                 data-autoplay="false">
@@ -380,7 +477,7 @@ border-radius:25px;
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BE%B9%E6%A1%86"><span class="toc-number">1.</span> <span class="toc-text">边框</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%86%E8%A7%92border-radius"><span class="toc-number">1.1.</span> <span class="toc-text">圆角	border-radius</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%92%E9%98%B4%E5%BD%B1box-shadow"><span class="toc-number">1.2.</span> <span class="toc-text">盒阴影	box-shadow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E6%A1%86%E5%9B%BEborder-image"><span class="toc-number">1.3.</span> <span class="toc-text">边框图	border-image</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E5%9B%BEbackground-image"><span class="toc-number">2.1.</span> <span class="toc-text">背景图	background-image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E5%A4%A7%E5%B0%8Fbackground-size"><span class="toc-number">2.2.</span> <span class="toc-text">背景大小	background-size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-origin"><span class="toc-number">2.3.</span> <span class="toc-text">background-origin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-clip"><span class="toc-number">2.4.</span> <span class="toc-text">background-clip</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%90%E5%8F%98%E6%95%88%E6%9E%9C"><span class="toc-number">3.</span> <span class="toc-text">渐变效果</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%B8%90%E5%8F%98"><span class="toc-number">3.1.</span> <span class="toc-text">线性渐变</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%84%E5%90%91%E6%B8%90%E5%8F%98"><span class="toc-number">3.2.</span> <span class="toc-text">径向渐变</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%98%B4%E5%BD%B1%E6%95%88%E6%9E%9C"><span class="toc-number">4.</span> <span class="toc-text">阴影效果</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E9%98%B4%E5%BD%B1text-shadow"><span class="toc-number">4.1.</span> <span class="toc-text">文本阴影	text-shadow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%92%E9%98%B4%E5%BD%B1box-shadow-1"><span class="toc-number">4.2.</span> <span class="toc-text">盒阴影	box-shadow</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2"><span class="toc-number">5.</span> <span class="toc-text">转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E5%B1%9E%E6%80%A7transform"><span class="toc-number">5.1.</span> <span class="toc-text">转换属性	transform</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB"><span class="toc-number">6.</span> <span class="toc-text">动画</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BE%B9%E6%A1%86"><span class="toc-number">1.</span> <span class="toc-text">边框</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%86%E8%A7%92border-radius"><span class="toc-number">1.1.</span> <span class="toc-text">圆角	border-radius</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%92%E9%98%B4%E5%BD%B1box-shadow"><span class="toc-number">1.2.</span> <span class="toc-text">盒阴影	box-shadow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E6%A1%86%E5%9B%BEborder-image"><span class="toc-number">1.3.</span> <span class="toc-text">边框图	border-image</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E5%9B%BEbackground-image"><span class="toc-number">2.1.</span> <span class="toc-text">背景图	background-image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E5%A4%A7%E5%B0%8Fbackground-size"><span class="toc-number">2.2.</span> <span class="toc-text">背景大小	background-size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-origin"><span class="toc-number">2.3.</span> <span class="toc-text">background-origin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-clip"><span class="toc-number">2.4.</span> <span class="toc-text">background-clip</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%90%E5%8F%98%E6%95%88%E6%9E%9C"><span class="toc-number">3.</span> <span class="toc-text">渐变效果</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%B8%90%E5%8F%98"><span class="toc-number">3.1.</span> <span class="toc-text">线性渐变</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%84%E5%90%91%E6%B8%90%E5%8F%98"><span class="toc-number">3.2.</span> <span class="toc-text">径向渐变</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%98%B4%E5%BD%B1%E6%95%88%E6%9E%9C"><span class="toc-number">4.</span> <span class="toc-text">阴影效果</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E9%98%B4%E5%BD%B1text-shadow"><span class="toc-number">4.1.</span> <span class="toc-text">文本阴影	text-shadow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%92%E9%98%B4%E5%BD%B1box-shadow-1"><span class="toc-number">4.2.</span> <span class="toc-text">盒阴影	box-shadow</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2"><span class="toc-number">5.</span> <span class="toc-text">转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E5%B1%9E%E6%80%A7transform"><span class="toc-number">5.1.</span> <span class="toc-text">转换属性	transform</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB"><span class="toc-number">6.</span> <span class="toc-text">动画</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E5%88%97%EF%BC%88%E5%88%86%E6%A0%8F%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">多列（分栏）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E6%95%B0column-count"><span class="toc-number">7.1.</span> <span class="toc-text">列数	column-count</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E9%97%B4%E9%9A%99column-gap"><span class="toc-number">7.2.</span> <span class="toc-text">列间隙	column-gap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E5%88%86%E5%89%B2%E7%BA%BFcolumn-rule"><span class="toc-number">7.3.</span> <span class="toc-text">列分割线	column-rule</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%88%97%E8%83%BD%E5%8A%9Bcolumn-span"><span class="toc-number">7.4.</span> <span class="toc-text">跨列能力	column-span</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E5%AE%BD-column-width"><span class="toc-number">7.5.</span> <span class="toc-text">列宽 	column-width</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2"><span class="toc-number">8.</span> <span class="toc-text">用户界面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B0%BA%E5%AF%B8resize"><span class="toc-number">8.1.</span> <span class="toc-text">自定义尺寸	resize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%86%E5%B0%BA%E5%AF%B8box-sizing"><span class="toc-number">8.2.</span> <span class="toc-text">方框尺寸	box-sizing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E8%BD%AE%E5%BB%93outline"><span class="toc-number">8.3.</span> <span class="toc-text">外轮廓	outline</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90%E9%87%8D%E7%82%B9%EF%BC%81%EF%BC%81%EF%BC%81"><span class="toc-number">9.</span> <span class="toc-text">弹性盒子	重点！！！</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AA%92%E4%BD%93%E7%9B%91%E6%B5%8B-media"><span class="toc-number">10.</span> <span class="toc-text">媒体监测	@media</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80%E6%8A%80%E5%B7%A7"><span class="toc-number">11.</span> <span class="toc-text">网格布局技巧</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E6%8A%80%E5%B7%A7"><span class="toc-number">12.</span> <span class="toc-text">图片技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">12.1.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%89%E9%92%AE%E6%8A%80%E5%B7%A7"><span class="toc-number">13.</span> <span class="toc-text">按钮技巧</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BF%BB%E9%A1%B5%E6%8C%89%E9%92%AE%E6%8A%80%E5%B7%A7"><span class="toc-number">14.</span> <span class="toc-text">翻页按钮技巧</span></a></li></ol>
                 </div>
             </div>
             
@@ -400,7 +497,7 @@ border-radius:25px;
 <footer>
     <p class="copyright" id="copyright">
     <!-- 博客总字数 -->
-        <span style="color:#9e9e9e"><b class="iconfont icon-text2"></b>&nbsp字数&nbsp<span class="gradient-text">11.4k</span>&nbsp字</span>&nbsp&nbsp
+        <span style="color:#9e9e9e"><b class="iconfont icon-text2"></b>&nbsp字数&nbsp<span class="gradient-text">11.9k</span>&nbsp字</span>&nbsp&nbsp
         
     <!-- 不蒜子统计 -->
     <span style="color:#9e9e9e">
