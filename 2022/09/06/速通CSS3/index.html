@@ -131,13 +131,13 @@ border-radius:25px;
 
                 <span title="post.wordcount">
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2k
+                    2.3k
                 </span>
                 
                 
                 <span >
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    14&nbspmins
+                    17&nbspmins
                 </span>
                 
                 
@@ -416,13 +416,38 @@ border-radius:25px;
 	<span class="token property">outline-offset</span><span class="token punctuation">:</span>15px<span class="token punctuation">;</span><span class="token comment">/* 指定外轮廓离border的距离 */</span>
 <span class="token punctuation">&#125;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h1 id="弹性盒子重点！！！"><a href="#弹性盒子重点！！！" class="headerlink" title="弹性盒子	重点！！！"></a><u>弹性盒子	重点！！！</u></h1><h1 id="媒体监测-media"><a href="#媒体监测-media" class="headerlink" title="媒体监测	@media"></a>媒体监测	@media</h1><p>在屏幕可视窗口尺寸<strong>小于 480 像素</strong>的设备上修改背景颜色:</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">body</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> pink<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
+<span class="token atrule"><span class="token rule">@media</span> screen <span class="token keyword">and</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> 480px<span class="token punctuation">)</span></span> <span class="token punctuation">&#123;</span>
+    <span class="token selector">body</span> <span class="token punctuation">&#123;</span>
+        <span class="token property">background-color</span><span class="token punctuation">:</span> lightgreen<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220919083007012.png" class="" title="image-20220919083007012">
 
+<img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220919083031067.png" class="" title="image-20220919083031067">
 
+<p>屏幕可视尺寸小于 600 px 时，隐藏以下元素:</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token atrule"><span class="token rule">@media</span> screen <span class="token keyword">and</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> 600px<span class="token punctuation">)</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token selector">div.example</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>在屏幕可视窗口尺寸大于 480 像素时将菜单<strong>浮动</strong>到页面左侧:</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token atrule"><span class="token rule">@media</span> screen <span class="token keyword">and</span> <span class="token punctuation">(</span><span class="token property">min-width</span><span class="token punctuation">:</span> 480px<span class="token punctuation">)</span></span> <span class="token punctuation">&#123;</span>
+    <span class="token selector">#leftsidebar</span> <span class="token punctuation">&#123;</span><span class="token property">width</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span><span class="token property">float</span><span class="token punctuation">:</span>left<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+    <span class="token selector">#main</span> <span class="token punctuation">&#123;</span><span class="token property">margin-left</span><span class="token punctuation">:</span>216px<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="弹性盒子重点！！！"><a href="#弹性盒子重点！！！" class="headerlink" title="弹性盒子	重点！！！"></a><u>弹性盒子	重点！！！</u></h1><h1 id="媒体监测-media"><a href="#媒体监测-media" class="headerlink" title="媒体监测	@media"></a>媒体监测	@media</h1><h1 id="CSS补充"><a href="#CSS补充" class="headerlink" title="CSS补充"></a>CSS补充</h1><h2 id="display"><a href="#display" class="headerlink" title="display"></a>display</h2><h3 id="隐藏元素"><a href="#隐藏元素" class="headerlink" title="隐藏元素"></a>隐藏元素</h3><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">h1</span><span class="token punctuation">&#123;</span><span class="token property">visibility</span><span class="token punctuation">:</span>hidden<span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token comment">/*只是隐藏内容，仍然占据空间*/</span>
+<img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220919083420823.png" class="" title="image-20220919083420823">
+
+<img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220919083430042.png" class="" title="image-20220919083430042">
+
+<h1 id="CSS补充"><a href="#CSS补充" class="headerlink" title="CSS补充"></a>CSS补充</h1><h2 id="display"><a href="#display" class="headerlink" title="display"></a>display</h2><h3 id="隐藏元素"><a href="#隐藏元素" class="headerlink" title="隐藏元素"></a>隐藏元素</h3><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">h1</span><span class="token punctuation">&#123;</span><span class="token property">visibility</span><span class="token punctuation">:</span>hidden<span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token comment">/*只是隐藏内容，仍然占据空间*/</span>
 <span class="token selector">h1</span><span class="token punctuation">&#123;</span><span class="token property">display</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="块元素、内联元素"><a href="#块元素、内联元素" class="headerlink" title="块元素、内联元素"></a>块元素、内联元素</h3><p>块元素，占用了全部宽度，在前后都是换行符。</p>
@@ -531,7 +556,68 @@ border-radius:25px;
 
 
 
-<h1 id="一些CSS技巧"><a href="#一些CSS技巧" class="headerlink" title="一些CSS技巧"></a>一些CSS技巧</h1><h2 id="网格布局技巧"><a href="#网格布局技巧" class="headerlink" title="网格布局技巧"></a>网格布局技巧</h2><h2 id="图片技巧"><a href="#图片技巧" class="headerlink" title="图片技巧"></a>图片技巧</h2><h2 id="按钮技巧"><a href="#按钮技巧" class="headerlink" title="按钮技巧"></a>按钮技巧</h2><h2 id="翻页按钮技巧"><a href="#翻页按钮技巧" class="headerlink" title="翻页按钮技巧"></a>翻页按钮技巧</h2><h1 id="又一些技巧"><a href="#又一些技巧" class="headerlink" title="又一些技巧"></a>又一些技巧</h1><h2 id="居中技巧"><a href="#居中技巧" class="headerlink" title="居中技巧"></a>居中技巧</h2><h2 id="下拉菜单技巧"><a href="#下拉菜单技巧" class="headerlink" title="下拉菜单技巧"></a>下拉菜单技巧</h2><h2 id="悬浮提示技巧"><a href="#悬浮提示技巧" class="headerlink" title="悬浮提示技巧"></a>悬浮提示技巧</h2><h2 id="网页布局技巧"><a href="#网页布局技巧" class="headerlink" title="网页布局技巧"></a>网页布局技巧</h2>
+<h1 id="一些CSS技巧"><a href="#一些CSS技巧" class="headerlink" title="一些CSS技巧"></a>一些CSS技巧</h1><h2 id="网格布局技巧"><a href="#网格布局技巧" class="headerlink" title="网格布局技巧"></a>网格布局技巧</h2><p>当HTML元素的display属性被设置为gird或inline-grid时，它就变成了网格容器，它的直系子元素也变成了网格元素。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>grid-gap</td>
+<td>指定网格见的间隙（边框）</td>
+</tr>
+<tr>
+<td>grid-template-columns</td>
+<td>指定列数、列宽</td>
+</tr>
+<tr>
+<td>grid-template-rows</td>
+<td>指定行数、行宽</td>
+</tr>
+<tr>
+<td>grid-row-start</td>
+<td>指定某网格元素的起始线</td>
+</tr>
+<tr>
+<td>grid-row-end</td>
+<td>指定某网格元素的终止线</td>
+</tr>
+<tr>
+<td>grid-column-start</td>
+<td></td>
+</tr>
+<tr>
+<td>grid-column-end</td>
+<td></td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.grid-container</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> auto auto auto<span class="token punctuation">;</span>
+  <span class="token property">grid-gap</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> #2196F3<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.grid-container > div</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 0.8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 20px 0<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.item1</span> <span class="token punctuation">&#123;</span> <span class="token property">grid-area</span><span class="token punctuation">:</span> 1 / span 3 / 2 / 4<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token selector">.item2</span> <span class="token punctuation">&#123;</span> <span class="token property">grid-area</span><span class="token punctuation">:</span> 3 / 3 / 4 / 4<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token selector">.item3</span> <span class="token punctuation">&#123;</span> <span class="token property">grid-area</span><span class="token punctuation">:</span> 2 / 1 / 3 / 2<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token selector">.item4</span> <span class="token punctuation">&#123;</span> <span class="token property">grid-area</span><span class="token punctuation">:</span> 2 / 2 / span 2 / 3<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token selector">.item5</span> <span class="token punctuation">&#123;</span> <span class="token property">grid-area</span><span class="token punctuation">:</span> 3 / 1 / 4 / 2<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token selector">.item6</span> <span class="token punctuation">&#123;</span> <span class="token property">grid-area</span><span class="token punctuation">:</span> 2 / 3 / 3 / 4<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/image-20220919094156231.png" class="" title="image-20220919094156231">
+
+<h2 id="图片技巧"><a href="#图片技巧" class="headerlink" title="图片技巧"></a>图片技巧</h2><h2 id="按钮技巧"><a href="#按钮技巧" class="headerlink" title="按钮技巧"></a>按钮技巧</h2><h2 id="翻页按钮技巧"><a href="#翻页按钮技巧" class="headerlink" title="翻页按钮技巧"></a>翻页按钮技巧</h2><h1 id="又一些技巧"><a href="#又一些技巧" class="headerlink" title="又一些技巧"></a>又一些技巧</h1><h2 id="居中技巧"><a href="#居中技巧" class="headerlink" title="居中技巧"></a>居中技巧</h2><h2 id="下拉菜单技巧"><a href="#下拉菜单技巧" class="headerlink" title="下拉菜单技巧"></a>下拉菜单技巧</h2><h2 id="悬浮提示技巧"><a href="#悬浮提示技巧" class="headerlink" title="悬浮提示技巧"></a>悬浮提示技巧</h2><h2 id="网页布局技巧"><a href="#网页布局技巧" class="headerlink" title="网页布局技巧"></a>网页布局技巧</h2>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
                 data-autoplay="false">
@@ -606,7 +692,7 @@ border-radius:25px;
 <footer>
     <p class="copyright" id="copyright">
     <!-- 博客总字数 -->
-        <span style="color:#9e9e9e"><b class="iconfont icon-text2"></b>&nbsp字数&nbsp<span class="gradient-text">12.5k</span>&nbsp字</span>&nbsp&nbsp
+        <span style="color:#9e9e9e"><b class="iconfont icon-text2"></b>&nbsp字数&nbsp<span class="gradient-text">12.8k</span>&nbsp字</span>&nbsp&nbsp
         
     <!-- 不蒜子统计 -->
     <span style="color:#9e9e9e">
