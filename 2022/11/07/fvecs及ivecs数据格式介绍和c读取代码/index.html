@@ -123,13 +123,13 @@
 
                 <span title="post.wordcount">
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    433
+                    753
                 </span>
                 
                 
                 <span >
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    3&nbspmins
+                    5&nbspmins
                 </span>
                 
                 
@@ -188,7 +188,71 @@
 <p>其中<code>line_num</code>是行数，<code>filesize</code>是文件字节数，<code>dim+1</code>指每个向量占用的数值个数，<code>4</code>指每4个字节存储一个数值。</p>
 <h2 id="ivecs"><a href="#ivecs" class="headerlink" title="ivecs"></a>ivecs</h2><p>ivecs其实和fvecs的格式是一样的，只不过它存储的不是向量，而是每一条查询的答案。</p>
 <p>就是说，ivecs里的每一“行”里，第一个数据是查询答案的数量n，后面n个数是答案向量的id</p>
-<h1 id="cpp"><a href="#cpp" class="headerlink" title="cpp"></a>cpp</h1>
+<h1 id="cpp读取ivecs、fvecs文件代码"><a href="#cpp读取ivecs、fvecs文件代码" class="headerlink" title="cpp读取ivecs、fvecs文件代码"></a>cpp读取ivecs、fvecs文件代码</h1><p>先将下面的代码放入read.cpp，然后编译出read.exe</p>
+<p>在read.exe所在目录下放置groundtruth文件，然后在cmd中输入：</p>
+<pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">.\read.exe .\xzx_groundtruth<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>结果如下：</p>
+<p><img src="D:\Hexo2\source_posts\fvecs及ivecs数据格式介绍和c读取代码\image-20221107175656852.png" alt="image-20221107175656852"></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;fstream&gt;
+#include &lt;vector&gt;
+#include&lt;iostream&gt;
+using namespace std;
+ 
+void load_ivecs_data(const char* filename,
+                 std::vector&lt;std::vector&lt;float&gt; &gt;&amp; results, unsigned &amp;num, unsigned &amp;dim) &#123;
+  std::ifstream in(filename, std::ios::binary);
+  if (!in.is_open()) &#123;
+    std::cout &lt;&lt; &quot;open file error&quot; &lt;&lt; std::endl;
+    exit(-1);
+  &#125;
+  in.read((char *)&amp;dim, 4);
+  
+  
+  
+  in.seekg(0, std::ios::end);
+  std::ios::pos_type ss &#x3D; in.tellg();
+  size_t fsize &#x3D; (size_t)ss;
+  num &#x3D; (unsigned)(fsize &#x2F; (dim + 1) &#x2F; 4);
+  results.resize(num);
+  for (unsigned i &#x3D; 0; i &lt; num; i++) results[i].resize(dim);
+
+  in.seekg(0, std::ios::beg);
+  for (size_t i &#x3D; 0; i &lt; num; i++) &#123;
+    in.seekg(4, std::ios::cur);
+    in.read((char*)results[i].data(), dim * 4);
+    
+  &#125;
+  in.close();
+&#125;
+
+
+int main(int argc, char** argv) &#123;
+  std::vector&lt;std::vector&lt;float&gt; &gt; true_load;
+  unsigned dim, num;
+  load_ivecs_data(argv[1], true_load, num, dim);
+    std::cout &lt;&lt; &quot;result_num：&quot;&lt;&lt; num &lt;&lt; std::endl &lt;&lt; &quot;result dimension：&quot; &lt;&lt; dim &lt;&lt; std::endl;
+  for(size_t i &#x3D; 0; i &lt; num; i++) &#123;
+    for(size_t j &#x3D; 0; j &lt; dim; j++) &#123;
+      std::cout &lt;&lt; true_load[i][j] &lt;&lt; &quot; &quot;;
+    &#125;
+    std::cout &lt;&lt; std::endl;
+  &#125;
+  std::cout &lt;&lt; &quot;result_num：&quot;&lt;&lt; num &lt;&lt; std::endl &lt;&lt; &quot;result dimension：&quot; &lt;&lt; dim &lt;&lt; std::endl;
+  return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
                 data-autoplay="false">
@@ -198,10 +262,6 @@
             
             <div class="post-nav">
                 <hr>
-                
-                    <div class="post-nav-item">上一篇&nbsp:&nbsp&nbsp<a href="/2022/11/07/fvecs%E5%8F%8Aivecs%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E4%BB%8B%E7%BB%8D%E5%92%8Cc%E5%86%99%E4%BB%A3%E7%A0%81/" rel="prev" 
-                        title="fvecs及ivecs数据格式介绍和c读取代码" style="color:black">fvecs及ivecs数据格式介绍和c读取代码
-                      </a></div>
                 
                 
                     <div class="post-nav-item">下一篇&nbsp:&nbsp&nbsp<a href="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/" rel="next" 
@@ -236,7 +296,7 @@
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">8 <p>文章</p></a></li>
+                    <li><a href="/">7 <p>文章</p></a></li>
                     <li><a href="/categories">8 <p>分类</p></a></li>
                     <li><a href="/tags">10 <p>标签</p></a></li>
                 </ul>
@@ -247,7 +307,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ivecs%E4%B8%8Efvecs%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">ivecs与fvecs格式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#fvecs"><span class="toc-number">1.1.</span> <span class="toc-text">fvecs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ivecs"><span class="toc-number">1.2.</span> <span class="toc-text">ivecs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cpp"><span class="toc-number">2.</span> <span class="toc-text">cpp</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ivecs%E4%B8%8Efvecs%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">ivecs与fvecs格式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#fvecs"><span class="toc-number">1.1.</span> <span class="toc-text">fvecs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ivecs"><span class="toc-number">1.2.</span> <span class="toc-text">ivecs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cpp%E8%AF%BB%E5%8F%96ivecs%E3%80%81fvecs%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">cpp读取ivecs、fvecs文件代码</span></a></li></ol>
                 </div>
             </div>
             
@@ -267,7 +327,7 @@
 <footer>
     <p class="copyright" id="copyright">
     <!-- 博客总字数 -->
-        <span style="color:#9e9e9e"><b class="iconfont icon-text2"></b>&nbsp字数&nbsp<span class="gradient-text">14k</span>&nbsp字</span>&nbsp&nbsp
+        <span style="color:#9e9e9e"><b class="iconfont icon-text2"></b>&nbsp字数&nbsp<span class="gradient-text">13.5k</span>&nbsp字</span>&nbsp&nbsp
         
     <!-- 不蒜子统计 -->
     <span style="color:#9e9e9e">
