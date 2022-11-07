@@ -5,16 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>第一个脚本——百度翻译爬虫 - SPIN&nbsp&nbsp自旋</title>
+    <title>fvecs及ivecs数据格式介绍和c读取代码 - SPIN&nbsp&nbsp自旋</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <script src="/js/anime.min.js"></script>
     <meta name="keywords" content="自旋 博客 SPIN spin XUinRZ xuinrz,"> 
-    <meta name="description" content="记录第一次制作脚本
-本文记录制作一个调用百度翻译实现翻译功能的小脚本
-主要有三个步骤：【找接口】&amp;#x3D;&amp;gt;【研究关键字】&amp;#x3D;&amp;gt;【写脚本】
-找到翻译请求接口这一步没有难度，在百,"> 
+    <meta name="description" content="
+最近在做关于结构化及非结构化数据混合索引及搜索的工作，其中有一项挑战是根据论文中的数据集、标签集，自己得到真值集（不知道为啥论文没给出真值集），然后进行后续工作。
+在此过程中，我需要知道真值集的存,"> 
     <meta name="author" content="XUinRZ"> 
     <link rel="alternative" href="atom.xml" title="SPIN" type="application/atom+xml"> 
     <link rel="icon" href="/img/avatar.png"> 
@@ -84,7 +83,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="/">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">第一个脚本——百度翻译爬虫</h3>
+        <h3 class="subtitle">fvecs及ivecs数据格式介绍和c读取代码</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -111,12 +110,12 @@
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/脚本"><b>「
-                    </b>脚本<b> 」</b></a>
+                <a href="/categories/c++"><b>「
+                    </b>C++<b> 」</b></a>
                 
-                六月 29, 2022
+                十一月 07, 2022
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/" title="第一个脚本——百度翻译爬虫" class="">第一个脚本——百度翻译爬虫</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2022/11/07/fvecs%E5%8F%8Aivecs%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E4%BB%8B%E7%BB%8D%E5%92%8Cc%E5%86%99%E4%BB%A3%E7%A0%81/" title="fvecs及ivecs数据格式介绍和c读取代码" class="">fvecs及ivecs数据格式介绍和c读取代码</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
@@ -124,17 +123,17 @@
 
                 <span title="post.wordcount">
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    754
+                    753
                 </span>
                 
                 
                 <span >
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    6&nbspmins
+                    5&nbspmins
                 </span>
                 
                 
-                <span id="/2022/06/29/第一个脚本——百度翻译爬虫/" class="leancloud_visitors" data-flag-title="第一个脚本——百度翻译爬虫">
+                <span id="/2022/11/07/fvecs及ivecs数据格式介绍和c写代码/" class="leancloud_visitors" data-flag-title="fvecs及ivecs数据格式介绍和c读取代码">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">1000000</span>
                 </span>
@@ -143,7 +142,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" rel="tag">数据集</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" rel="tag">文件格式</a></li></ul>
             
         </div>
     </div>
@@ -169,79 +168,104 @@
             style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"
             ></canvas>
             <script src="/js/background.js"></script>
-            <p>记录第一次制作脚本</p>
-<p>本文记录制作一个调用百度翻译实现翻译功能的小脚本</p>
-<p>主要有三个步骤：【找接口】&#x3D;&gt;【研究关键字】&#x3D;&gt;【写脚本】</p>
-<h2 id="找到翻译请求接口"><a href="#找到翻译请求接口" class="headerlink" title="找到翻译请求接口"></a>找到翻译请求接口</h2><p>这一步没有难度，在百度翻译页面打开开发者工具，然后输入<code>哈哈</code>，然后在network里找接口就可以。</p>
-<p>如果请求太多的话，可以用<code>Fetch/XHR</code>按钮过滤一下：</p>
-<img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630004106276.png" class="" title="image-20220630004106276">
+            <blockquote>
+<p>最近在做关于<strong>结构化及非结构化数据混合索引及搜索</strong>的工作，其中有一项挑战是根据论文中的数据集、标签集，自己得到真值集（不知道为啥论文没给出真值集），然后进行后续工作。</p>
+<p>在此过程中，我需要知道真值集的存储格式——ivecs。</p>
+</blockquote>
+<h1 id="ivecs与fvecs格式"><a href="#ivecs与fvecs格式" class="headerlink" title="ivecs与fvecs格式"></a>ivecs与fvecs格式</h1><p>在常用的公开数据集中（如<a target="_blank" rel="noopener" href="http://downloads.zjulearning.org.cn/data/crawl.tar.gz">Crawl</a>、<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1TqV43kzuNYgAYXvXTKsAG1-ZKtcaYsmr/view">Enron</a>），数据集文件、查询文件往往使用fvecs格式存储。而真值集（即查询的答案）文件使用ivecs格式存储。其实这两种格式十分相似。</p>
 
-<p>可以看到，这是一个POST请求</p>
-<h2 id="分析请求关键字"><a href="#分析请求关键字" class="headerlink" title="分析请求关键字"></a>分析请求关键字</h2><ol>
-<li><p>从上面看到，关键字有<strong>from</strong>、<strong>to</strong>、<strong>query</strong>、<strong>transtype</strong>、<strong>simple_means_flag</strong>、<strong>sign</strong>、<strong>token</strong>、<strong>domain</strong>。</p>
-<p>分析之后，得出：<strong>from</strong>、<strong>to</strong>代表<strong>输入语言</strong>、<strong>输出语言</strong>；<strong>query</strong>为<strong>输入文字</strong>；<strong>transtype</strong>为<strong>翻译类型</strong>(自动翻译、点击后翻译等，这个关键字并不重要)；<strong>domain</strong>为常值”common”。而<strong>sign</strong>和<strong>token</strong>为一串<em><strong>奇怪的数字</strong></em></p>
-</li>
-<li><p>from、to指定语言类型，后面发现，from是可以自动检测或者手动指定的。如果希望自动检测，那就需要在请求翻译接口前请求一次langdetect，并匹配出语言类型。<img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630005521930.png" class="" title="image-20220630005521930"></p>
-</li>
-<li><p>query由用户输入；transtype和simple_means_flag完全可以写死。</p>
-</li>
-<li><p>至于token,全局搜索一下那串字符，发现它是请求fanyi.baidu.com时获取到的</p>
-<img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630010149574.png" class="" title="image-20220630010149574">
 
-<p>截止到目前，我需要关心的字段有：</p>
-<ul>
-<li>from：通过langdetect请求获取</li>
-<li>query：由用户输入</li>
-<li>token：请求fanyi.baidu.com获取</li>
-<li>sign：一个神秘字段</li>
-</ul>
-</li>
-<li><p>现在来研究这个sign：</p>
-<ul>
-<li><p>像token一样进行全局搜索，没有结果</p>
-<img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630010637908.png" class="" title="image-20220630010637908">
-</li>
-<li><p>从v2transapi请求的调用栈中寻找线索</p>
-<img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630010808634.png" class="" title="image-20220630010808634">
+<h2 id="fvecs"><a href="#fvecs" class="headerlink" title="fvecs"></a>fvecs</h2><p>数据集、查询集采用fvecs格式，其实他们是完全相同的东西。在数据集中，存储的是所有向量，而查询集中，存储的同样是向量，只是向量数量会少一些。</p>
+<p>fvecs采用二进制来存储，直接打开便是乱码。</p>
+<p>下面用一张图来表示fvecs的大致格式：</p>
 
-<p>一层层地观察call stack，在e.onTranslate附近发现可疑之处</p>
-<img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630011052897.png" class="" title="image-20220630011052897">
 
-<p>经过打断点调试，发现这里的n就是我输入的<code>哈哈</code>二字，所以，我只需要找到这个x()函数，就能得到<strong>sign</strong>的值！！！</p>
-<img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630014421971.png" class="" title="image-20220630014421971">
-</li>
-<li><p>在控制台里输入<code>x</code>并回车，弹出了我想要的函数。但在复制得到的函数并不能直接运行，因为函数中往往存在一些全局变量或调用了其他函数，这时，需要耐心地把它们补全。经历了一个window.gtk、一个n函数，我终于得到了sign值：</p>
-<img src="/2022/06/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91%E7%88%AC%E8%99%AB/image-20220630011935505.png" class="" title="image-20220630011935505">
-</li>
-<li><p>至此，关键字全部复现。</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="写-抄-脚本"><a href="#写-抄-脚本" class="headerlink" title="写(抄)脚本"></a>写(抄)脚本</h2><p>脚本用python编写，写的过程中要注意请求头携带cookie。</p>
-<p>另外，我在初次使用PyCharm时，遇到了两个问题：</p>
-<ul>
-<li><p>运行不了js脚本：其实，通过命令行是可以直接node xxx.js的；但最后找到了标准方法——下载nodejs插件。。。</p>
-</li>
-<li><p>py文件中import报错：我明明已经安装过这些库了，怎么说我没有呢？原来新建项目的时候，PyCharm给我在项目目录下放了一个精简的python编译器，而我所安装的库，都在我的AppData那里。。。于是有两种解决思路：一是在项目目录下安装那些库，二是直接使用我自己的解释器。</p>
-</li>
-</ul>
-<p>附：<a target="_blank" rel="noopener" href="https://github.com/kgepachong/crawler/tree/main/fanyi_baidu_com">git hub上的百度翻译小爬虫</a></p>
+<p>每一“行”中，第一个数表示数据的维度dim，后面跟着的dim个数便是向量各维度的值。</p>
+<p>因此，一“行”表示的便是一个向量。</p>
+<p>那么行数是如何计算的呢？我们一般使用下面的式子：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">line_num &#x3D; filesize &#x2F; (dim + 1 ) &#x2F; 4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>其中<code>line_num</code>是行数，<code>filesize</code>是文件字节数，<code>dim+1</code>指每个向量占用的数值个数，<code>4</code>指每4个字节存储一个数值。</p>
+<h2 id="ivecs"><a href="#ivecs" class="headerlink" title="ivecs"></a>ivecs</h2><p>ivecs其实和fvecs的格式是一样的，只不过它存储的不是向量，而是每一条查询的答案。</p>
+<p>就是说，ivecs里的每一“行”里，第一个数据是查询答案的数量n，后面n个数是答案向量的id</p>
+<h1 id="cpp读取ivecs、fvecs文件代码"><a href="#cpp读取ivecs、fvecs文件代码" class="headerlink" title="cpp读取ivecs、fvecs文件代码"></a>cpp读取ivecs、fvecs文件代码</h1><p>先将下面的代码放入read.cpp，然后编译出read.exe</p>
+<p>在read.exe所在目录下放置groundtruth文件，然后在cmd中输入：</p>
+<pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">.\read.exe .\xzx_groundtruth<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>结果如下：</p>
+<p><img src="D:\Hexo2\source_posts\fvecs及ivecs数据格式介绍和c读取代码\image-20221107175656852.png" alt="image-20221107175656852"></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;fstream&gt;
+#include &lt;vector&gt;
+#include&lt;iostream&gt;
+using namespace std;
+ 
+void load_ivecs_data(const char* filename,
+                 std::vector&lt;std::vector&lt;float&gt; &gt;&amp; results, unsigned &amp;num, unsigned &amp;dim) &#123;
+  std::ifstream in(filename, std::ios::binary);
+  if (!in.is_open()) &#123;
+    std::cout &lt;&lt; &quot;open file error&quot; &lt;&lt; std::endl;
+    exit(-1);
+  &#125;
+  in.read((char *)&amp;dim, 4);
+  
+  
+  
+  in.seekg(0, std::ios::end);
+  std::ios::pos_type ss &#x3D; in.tellg();
+  size_t fsize &#x3D; (size_t)ss;
+  num &#x3D; (unsigned)(fsize &#x2F; (dim + 1) &#x2F; 4);
+  results.resize(num);
+  for (unsigned i &#x3D; 0; i &lt; num; i++) results[i].resize(dim);
+
+  in.seekg(0, std::ios::beg);
+  for (size_t i &#x3D; 0; i &lt; num; i++) &#123;
+    in.seekg(4, std::ios::cur);
+    in.read((char*)results[i].data(), dim * 4);
+    
+  &#125;
+  in.close();
+&#125;
+
+
+int main(int argc, char** argv) &#123;
+  std::vector&lt;std::vector&lt;float&gt; &gt; true_load;
+  unsigned dim, num;
+  load_ivecs_data(argv[1], true_load, num, dim);
+    std::cout &lt;&lt; &quot;result_num：&quot;&lt;&lt; num &lt;&lt; std::endl &lt;&lt; &quot;result dimension：&quot; &lt;&lt; dim &lt;&lt; std::endl;
+  for(size_t i &#x3D; 0; i &lt; num; i++) &#123;
+    for(size_t j &#x3D; 0; j &lt; dim; j++) &#123;
+      std::cout &lt;&lt; true_load[i][j] &lt;&lt; &quot; &quot;;
+    &#125;
+    std::cout &lt;&lt; std::endl;
+  &#125;
+  std::cout &lt;&lt; &quot;result_num：&quot;&lt;&lt; num &lt;&lt; std::endl &lt;&lt; &quot;result dimension：&quot; &lt;&lt; dim &lt;&lt; std::endl;
+  return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
                 data-autoplay="false">
-                <source type="audio/mpeg" src="https://m801.music.126.net/20220725233420/10391d8a1c08f1e4bd8e3d83d2929434/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/15034084859/602d/3cd2/fd4d/46a60a69e877c836d500027c0e5af965.mp3">
+                <source type="audio/mpeg" src="/statics/greatbug.mp3">
             </audio>
             
             
             <div class="post-nav">
                 <hr>
                 
-                    <div class="post-nav-item">上一篇&nbsp:&nbsp&nbsp<a href="/2022/07/04/%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0Java/" rel="prev" 
-                        title="开始学习Java" style="color:black">开始学习Java
-                      </a></div>
                 
+                    <div class="post-nav-item">下一篇&nbsp:&nbsp&nbsp<a href="/2022/11/07/fvecs%E5%8F%8Aivecs%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E4%BB%8B%E7%BB%8D%E5%92%8Cc%E8%AF%BB%E5%8F%96%E4%BB%A3%E7%A0%81/" rel="next" 
+                        title="fvecs及ivecs数据格式介绍和c读取代码" style="color:black">fvecs及ivecs数据格式介绍和c读取代码</a></div>
                                 
             </div>   
                         
@@ -283,7 +307,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%88%B0%E7%BF%BB%E8%AF%91%E8%AF%B7%E6%B1%82%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.</span> <span class="toc-text">找到翻译请求接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E8%AF%B7%E6%B1%82%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">2.</span> <span class="toc-text">分析请求关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99-%E6%8A%84-%E8%84%9A%E6%9C%AC"><span class="toc-number">3.</span> <span class="toc-text">写(抄)脚本</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ivecs%E4%B8%8Efvecs%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">ivecs与fvecs格式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#fvecs"><span class="toc-number">1.1.</span> <span class="toc-text">fvecs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ivecs"><span class="toc-number">1.2.</span> <span class="toc-text">ivecs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cpp%E8%AF%BB%E5%8F%96ivecs%E3%80%81fvecs%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">cpp读取ivecs、fvecs文件代码</span></a></li></ol>
                 </div>
             </div>
             
