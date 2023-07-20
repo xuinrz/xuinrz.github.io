@@ -5,15 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>fvecs及ivecs数据格式介绍和c读取代码 - SPIN&nbsp&nbsp自旋</title>
+    <title>SpringBoot项目中使用Swagger - SPIN&nbsp&nbsp自旋</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <script src="/js/anime.min.js"></script>
     <meta name="keywords" content="自旋 博客 SPIN spin XUinRZ xuinrz,"> 
-    <meta name="description" content="
-最近在做关于结构化及非结构化数据混合索引及搜索的工作，其中有一项挑战是根据论文中的数据集、标签集，自己得到真值集（不知道为啥论文没给出真值集），然后进行后续工作。
-在此过程中，我需要知道真值集的存,"> 
+    <meta name="description" content="在Springboot后端开发中，我们需要与前端协商api，并给出api文档。以往我使用postman进行协作。对于前后端协作，postman还是比较方便的。但对于每一个开发的接口，我们都要重新把路,"> 
     <meta name="author" content="XUinRZ"> 
     <link rel="alternative" href="atom.xml" title="SPIN" type="application/atom+xml"> 
     <link rel="icon" href="/img/avatar.png"> 
@@ -83,7 +81,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="/">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">fvecs及ivecs数据格式介绍和c读取代码</h3>
+        <h3 class="subtitle">SpringBoot项目中使用Swagger</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -110,12 +108,12 @@
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/c++"><b>「
-                    </b>C++<b> 」</b></a>
+                <a href="/categories/Java"><b>「
+                    </b>JAVA<b> 」</b></a>
                 
-                十一月 07, 2022
+                七月 20, 2023
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2022/11/07/fvecs%E5%8F%8Aivecs%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E4%BB%8B%E7%BB%8D%E5%92%8Cc%E8%AF%BB%E5%8F%96%E4%BB%A3%E7%A0%81/" title="fvecs及ivecs数据格式介绍和c读取代码" class="">fvecs及ivecs数据格式介绍和c读取代码</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2023/07/20/SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8Swagger/" title="SpringBoot项目中使用Swagger" class="">SpringBoot项目中使用Swagger</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
@@ -123,17 +121,17 @@
 
                 <span title="post.wordcount">
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    801
+                    592
                 </span>
                 
                 
                 <span >
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    5&nbspmins
+                    4&nbspmins
                 </span>
                 
                 
-                <span id="/2022/11/07/fvecs及ivecs数据格式介绍和c读取代码/" class="leancloud_visitors" data-flag-title="fvecs及ivecs数据格式介绍和c读取代码">
+                <span id="/2023/07/20/SpringBoot项目中使用Swagger/" class="leancloud_visitors" data-flag-title="SpringBoot项目中使用Swagger">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">1000000</span>
                 </span>
@@ -142,7 +140,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" rel="tag">数据集</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" rel="tag">文件格式</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Swagger/" rel="tag">Swagger</a></li></ul>
             
         </div>
     </div>
@@ -168,103 +166,104 @@
             style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"
             ></canvas>
             <script src="/js/background.js"></script>
-            <blockquote>
-<p>最近在做关于<strong>结构化及非结构化数据混合索引及搜索</strong>的工作，其中有一项挑战是根据论文中的数据集、标签集，自己得到真值集（不知道为啥论文没给出真值集），然后进行后续工作。</p>
-<p>在此过程中，我需要知道真值集的存储格式——ivecs。</p>
-</blockquote>
-<h1 id="ivecs与fvecs格式"><a href="#ivecs与fvecs格式" class="headerlink" title="ivecs与fvecs格式"></a>ivecs与fvecs格式</h1><p>在常用的公开数据集中（如<a target="_blank" rel="noopener" href="http://downloads.zjulearning.org.cn/data/crawl.tar.gz">Crawl</a>、<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1TqV43kzuNYgAYXvXTKsAG1-ZKtcaYsmr/view">Enron</a>），数据集文件、查询文件往往使用fvecs格式存储。而真值集（即查询的答案）文件使用ivecs格式存储。其实这两种格式十分相似。</p>
-<img src="/2022/11/07/fvecs%E5%8F%8Aivecs%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E4%BB%8B%E7%BB%8D%E5%92%8Cc%E8%AF%BB%E5%8F%96%E4%BB%A3%E7%A0%81/image-20221107170635145.png" class="" title="image-20221107170635145">
+            <p>在Springboot后端开发中，我们需要与前端协商api，并给出api文档。以往我使用postman进行协作。对于前后端协作，postman还是比较方便的。但对于每一个开发的接口，我们都要重新把路径、接口名、参数注释写到调试工具里，这还是有些麻烦。</p>
+<p>Swagger提供了一种解决方案：在后端开发过程中，将api可视化到一个网页中，只需启动后端并访问该页面，即可查看自动化生成的接口文档。另外swagger也支持导出openapi格式的接口，可以直接import到postman中。</p>
+<p>下面是springfox提供的swagger在springboot中的使用方法：</p>
+<ol>
+<li><h3 id="在pom-xml加入依赖："><a href="#在pom-xml加入依赖：" class="headerlink" title="在pom.xml加入依赖："></a>在pom.xml加入依赖：</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>io.springfox<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>springfox-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>3.0.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span> <span class="token comment">&lt;!-- 请根据实际版本进行修改 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><h3 id="在Config包里写一个配置类SwaggerConfig-java："><a href="#在Config包里写一个配置类SwaggerConfig-java：" class="headerlink" title="在Config包里写一个配置类SwaggerConfig.java："></a>在Config包里写一个配置类SwaggerConfig.java：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Bean</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Configuration</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">springfox<span class="token punctuation">.</span>documentation<span class="token punctuation">.</span>builders<span class="token punctuation">.</span></span><span class="token class-name">ApiInfoBuilder</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">springfox<span class="token punctuation">.</span>documentation<span class="token punctuation">.</span>builders<span class="token punctuation">.</span></span><span class="token class-name">PathSelectors</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">springfox<span class="token punctuation">.</span>documentation<span class="token punctuation">.</span>builders<span class="token punctuation">.</span></span><span class="token class-name">RequestHandlerSelectors</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">springfox<span class="token punctuation">.</span>documentation<span class="token punctuation">.</span>service<span class="token punctuation">.</span></span><span class="token class-name">ApiInfo</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">springfox<span class="token punctuation">.</span>documentation<span class="token punctuation">.</span>spi<span class="token punctuation">.</span></span><span class="token class-name">DocumentationType</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">springfox<span class="token punctuation">.</span>documentation<span class="token punctuation">.</span>spring<span class="token punctuation">.</span>web<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span></span><span class="token class-name">Docket</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">springfox<span class="token punctuation">.</span>documentation<span class="token punctuation">.</span>swagger2<span class="token punctuation">.</span>annotations<span class="token punctuation">.</span></span><span class="token class-name">EnableSwagger2</span></span><span class="token punctuation">;</span>
 
-<h2 id="fvecs"><a href="#fvecs" class="headerlink" title="fvecs"></a>fvecs</h2><p>数据集、查询集采用fvecs格式，其实他们是完全相同的东西。在数据集中，存储的是所有向量，而查询集中，存储的同样是向量，只是向量数量会少一些。</p>
-<p>fvecs采用二进制来存储，直接打开便是乱码。</p>
-<p>下面用一张图来表示fvecs的大致格式：</p>
-<img src="/2022/11/07/fvecs%E5%8F%8Aivecs%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E4%BB%8B%E7%BB%8D%E5%92%8Cc%E8%AF%BB%E5%8F%96%E4%BB%A3%E7%A0%81/image-20221107172151574.png" class="" title="image-20221107172151574">
+<span class="token annotation punctuation">@Configuration</span>
+<span class="token annotation punctuation">@EnableSwagger2</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SwaggerConfig</span> <span class="token punctuation">&#123;</span>
 
-<p>每一“行”中，第一个数表示数据的维度dim，后面跟着的dim个数便是向量各维度的值。</p>
-<p>因此，一“行”表示的便是一个向量。</p>
-<p>那么行数是如何计算的呢？我们一般使用下面的式子：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">line_num &#x3D; filesize &#x2F; (dim + 1 ) &#x2F; 4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Docket</span> <span class="token function">api</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Docket</span><span class="token punctuation">(</span><span class="token class-name">DocumentationType</span><span class="token punctuation">.</span>SWAGGER_2<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">apis</span><span class="token punctuation">(</span><span class="token class-name">RequestHandlerSelectors</span><span class="token punctuation">.</span><span class="token function">basePackage</span><span class="token punctuation">(</span><span class="token string">"com.example.controller"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 指定扫描Controller包路径</span>
+                <span class="token punctuation">.</span><span class="token function">paths</span><span class="token punctuation">(</span><span class="token class-name">PathSelectors</span><span class="token punctuation">.</span><span class="token function">any</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 匹配所有接口</span>
+                <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">apiInfo</span><span class="token punctuation">(</span><span class="token function">apiInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-<p>其中<code>line_num</code>是行数，<code>filesize</code>是文件字节数，<code>dim+1</code>指每个向量占用的数值个数，<code>4</code>指每4个字节存储一个数值。</p>
-<h2 id="ivecs"><a href="#ivecs" class="headerlink" title="ivecs"></a>ivecs</h2><p>ivecs其实和fvecs的格式是一样的，只不过它存储的不是向量，而是每一条查询的答案。</p>
-<p>就是说，ivecs里的每一“行”里，第一个数据是查询答案的数量n，后面n个数是答案向量的id</p>
-<h1 id="cpp读取ivecs、fvecs文件代码"><a href="#cpp读取ivecs、fvecs文件代码" class="headerlink" title="cpp读取ivecs、fvecs文件代码"></a>cpp读取ivecs、fvecs文件代码</h1><p>先将下面的代码放入read.cpp，然后编译出read.exe</p>
-<p>在read.exe所在目录下放置groundtruth文件，然后在cmd中输入：</p>
-<pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">.\read.exe .\xzx_groundtruth<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>结果如下：</p>
-<img src="/2022/11/07/fvecs%E5%8F%8Aivecs%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E4%BB%8B%E7%BB%8D%E5%92%8Cc%E8%AF%BB%E5%8F%96%E4%BB%A3%E7%A0%81/image-20221107180917088.png" class="" title="image-20221107180917088">
-
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;fstream&gt;
-#include &lt;vector&gt;
-#include&lt;iostream&gt;
-using namespace std;
- 
-void load_ivecs_data(const char* filename,
-                 std::vector&lt;std::vector&lt;float&gt; &gt;&amp; results, unsigned &amp;num, unsigned &amp;dim) &#123;
-  std::ifstream in(filename, std::ios::binary);
-  if (!in.is_open()) &#123;
-    std::cout &lt;&lt; &quot;open file error&quot; &lt;&lt; std::endl;
-    exit(-1);
-  &#125;
-  in.read((char *)&amp;dim, 4);
-  
-  
-  
-  in.seekg(0, std::ios::end);
-  std::ios::pos_type ss &#x3D; in.tellg();
-  size_t fsize &#x3D; (size_t)ss;
-  num &#x3D; (unsigned)(fsize &#x2F; (dim + 1) &#x2F; 4);
-  results.resize(num);
-  for (unsigned i &#x3D; 0; i &lt; num; i++) results[i].resize(dim);
-
-  in.seekg(0, std::ios::beg);
-  for (size_t i &#x3D; 0; i &lt; num; i++) &#123;
-    in.seekg(4, std::ios::cur);
-    in.read((char*)results[i].data(), dim * 4);
-    
-  &#125;
-  in.close();
-&#125;
+    <span class="token keyword">private</span> <span class="token class-name">ApiInfo</span> <span class="token function">apiInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ApiInfoBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">title</span><span class="token punctuation">(</span><span class="token string">"山大迷踪API"</span><span class="token punctuation">)</span> <span class="token comment">// 标题</span>
+                <span class="token punctuation">.</span><span class="token function">description</span><span class="token punctuation">(</span><span class="token string">"包含一些接口和模型"</span><span class="token punctuation">)</span> <span class="token comment">// 描述</span>
+                <span class="token punctuation">.</span><span class="token function">version</span><span class="token punctuation">(</span><span class="token string">"1.0.0"</span><span class="token punctuation">)</span> <span class="token comment">// 版本号</span>
+                <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><h3 id="在application-yml中添加配置："><a href="#在application-yml中添加配置：" class="headerlink" title="在application.yml中添加配置："></a>在application.yml中添加配置：</h3><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">、spring</span><span class="token punctuation">:</span>
+  <span class="token key atrule">mvc</span><span class="token punctuation">:</span>
+    <span class="token key atrule">pathmatch</span><span class="token punctuation">:</span>
+      <span class="token key atrule">matching-strategy</span><span class="token punctuation">:</span> ant_path_matcher<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-int main(int argc, char** argv) &#123;
-  std::vector&lt;std::vector&lt;float&gt; &gt; true_load;
-  unsigned dim, num;
-  load_ivecs_data(argv[1], true_load, num, dim);
-    std::cout &lt;&lt; &quot;result_num：&quot;&lt;&lt; num &lt;&lt; std::endl &lt;&lt; &quot;result dimension：&quot; &lt;&lt; dim &lt;&lt; std::endl;
-  for(size_t i &#x3D; 0; i &lt; num; i++) &#123;
-    for(size_t j &#x3D; 0; j &lt; dim; j++) &#123;
-      std::cout &lt;&lt; true_load[i][j] &lt;&lt; &quot; &quot;;
-    &#125;
-    std::cout &lt;&lt; std::endl;
-  &#125;
-  std::cout &lt;&lt; &quot;result_num：&quot;&lt;&lt; num &lt;&lt; std::endl &lt;&lt; &quot;result dimension：&quot; &lt;&lt; dim &lt;&lt; std::endl;
-  return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><h3 id="在自己项目的接口上添加Swagger提供的注解："><a href="#在自己项目的接口上添加Swagger提供的注解：" class="headerlink" title="在自己项目的接口上添加Swagger提供的注解："></a>在自己项目的接口上添加Swagger提供的注解：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/api"</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Api</span><span class="token punctuation">(</span>tags <span class="token operator">=</span> <span class="token string">"订单相关接口"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OrderController</span> <span class="token punctuation">&#123;</span>
 
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/hello"</span><span class="token punctuation">)</span>
+    <span class="token annotation punctuation">@ApiOperation</span><span class="token punctuation">(</span><span class="token string">"获取欢迎信息"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getHelloMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token string">"Hello!"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><h3 id="访问Swagger的ui界面："><a href="#访问Swagger的ui界面：" class="headerlink" title="访问Swagger的ui界面："></a>访问Swagger的ui界面：</h3><pre class="line-numbers language-http" data-language="http"><code class="language-http">Swagger各版本访问地址:
+2.9.x 访问地址:
+<span class="token header"><span class="token header-name keyword">http</span><span class="token punctuation">:</span><span class="token header-value">//ip:port/swagger-ui.html</span></span>
+3.0.x 访问地址:
+<span class="token header"><span class="token header-name keyword">http</span><span class="token punctuation">:</span><span class="token header-value">//ip:port/swagger-ui/index.html</span></span>
+3.0集成knife4j 访问地址:
+<span class="token header"><span class="token header-name keyword">http</span><span class="token punctuation">:</span><span class="token header-value">//ip:port/doc.html</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>效果图：</p>
+<img src="/2023/07/20/SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8Swagger/image-20230720111441845.png" class="" title="image-20230720111441845"></li>
+</ol>
+<p>另外，knife4j是springfox-swagger的增强版，knife4j有更好的ui、调试功能。在已经使用swagger的项目中，可以按照下面的步骤引入knife4j：</p>
+<ol>
+<li><p>引入依赖：</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.github.xiaoymin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>knife4j-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.0.4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>在刚才的配置类上添加注解@EnableKnife4j：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token annotation punctuation">@EnableSwagger2</span>
+<span class="token annotation punctuation">@EnableKnife4j</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SwaggerConfig</span> <span class="token punctuation">&#123;</span>
+	<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>运行springboot应用，访问knife4j的ui：</p>
+<pre class="line-numbers language-http" data-language="http"><code class="language-http"><span class="token header"><span class="token header-name keyword">http</span><span class="token punctuation">:</span><span class="token header-value">//ip:port/doc.html</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h1 id="补档：python读取ivecs、fvecs代码"><a href="#补档：python读取ivecs、fvecs代码" class="headerlink" title="补档：python读取ivecs、fvecs代码"></a>补档：python读取ivecs、fvecs代码</h1><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> sys
-<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
-
-<span class="token keyword">def</span> <span class="token function">ivecs_read</span><span class="token punctuation">(</span>fname<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    a <span class="token operator">=</span> np<span class="token punctuation">.</span>fromfile<span class="token punctuation">(</span>fname<span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'int32'</span><span class="token punctuation">)</span>
-    d <span class="token operator">=</span> a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-    <span class="token keyword">return</span> a<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> d <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token keyword">def</span> <span class="token function">fvecs_read</span><span class="token punctuation">(</span>fname<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">return</span> ivecs_read<span class="token punctuation">(</span>fname<span class="token punctuation">)</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span>
-
-dataset_path <span class="token operator">=</span> sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-dataset <span class="token operator">=</span> fvecs_read<span class="token punctuation">(</span>dataset_path<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-
-
-
-
+<p>效果如下：</p>
+<img src="/2023/07/20/SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8Swagger/image-20230720114437145.png" class="" title="image-20230720114437145"></li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -276,13 +275,9 @@ dataset <span class="token operator">=</span> fvecs_read<span class="token punct
             <div class="post-nav">
                 <hr>
                 
-                    <div class="post-nav-item">上一篇&nbsp:&nbsp&nbsp<a href="/2023/07/20/SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8Swagger/" rel="prev" 
-                        title="SpringBoot项目中使用Swagger" style="color:black">SpringBoot项目中使用Swagger
-                      </a></div>
                 
-                
-                    <div class="post-nav-item">下一篇&nbsp:&nbsp&nbsp<a href="/2022/09/06/%E9%80%9F%E9%80%9ACSS3/" rel="next" 
-                        title="速通CSS3" style="color:black">速通CSS3</a></div>
+                    <div class="post-nav-item">下一篇&nbsp:&nbsp&nbsp<a href="/2022/11/07/fvecs%E5%8F%8Aivecs%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E4%BB%8B%E7%BB%8D%E5%92%8Cc%E8%AF%BB%E5%8F%96%E4%BB%A3%E7%A0%81/" rel="next" 
+                        title="fvecs及ivecs数据格式介绍和c读取代码" style="color:black">fvecs及ivecs数据格式介绍和c读取代码</a></div>
                                 
             </div>   
                         
@@ -324,7 +319,7 @@ dataset <span class="token operator">=</span> fvecs_read<span class="token punct
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ivecs%E4%B8%8Efvecs%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">ivecs与fvecs格式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#fvecs"><span class="toc-number">1.1.</span> <span class="toc-text">fvecs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ivecs"><span class="toc-number">1.2.</span> <span class="toc-text">ivecs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cpp%E8%AF%BB%E5%8F%96ivecs%E3%80%81fvecs%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">cpp读取ivecs、fvecs文件代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A5%E6%A1%A3%EF%BC%9Apython%E8%AF%BB%E5%8F%96ivecs%E3%80%81fvecs%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">补档：python读取ivecs、fvecs代码</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8pom-xml%E5%8A%A0%E5%85%A5%E4%BE%9D%E8%B5%96%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">在pom.xml加入依赖：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8Config%E5%8C%85%E9%87%8C%E5%86%99%E4%B8%80%E4%B8%AA%E9%85%8D%E7%BD%AE%E7%B1%BBSwaggerConfig-java%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">在Config包里写一个配置类SwaggerConfig.java：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8application-yml%E4%B8%AD%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">在application.yml中添加配置：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E8%87%AA%E5%B7%B1%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%8E%A5%E5%8F%A3%E4%B8%8A%E6%B7%BB%E5%8A%A0Swagger%E6%8F%90%E4%BE%9B%E7%9A%84%E6%B3%A8%E8%A7%A3%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">在自己项目的接口上添加Swagger提供的注解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AESwagger%E7%9A%84ui%E7%95%8C%E9%9D%A2%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">访问Swagger的ui界面：</span></a></li></ol>
                 </div>
             </div>
             
